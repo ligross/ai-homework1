@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мертвые не умирают — MMORPG</title>
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;700&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1a1612;
+            --paper-color: #d3c4a9;
+            --accent-blood: #8a0303;
+            --accent-magic: #4b0082;
+            --text-color: #c0b095;
+            --stone-border: #4a453f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'EB+Garamond', serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Текстура старой бумаги поверх всего сайта */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* --- Общие элементы UI --- */
+        .gothic-title {
+            font-family: 'UnifrakturMaguntia', cursive;
+            color: #e0d0b0;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        .cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .btn-ui {
+            display: inline-flex;
+            align-items: center;
+            padding: 15px 35px;
+            background: #2a2520;
+            border: 3px solid var(--stone-border);
+            color: var(--paper-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        .btn-ui:hover {
+            border-color: var(--accent-blood);
+            color: #fff;
+            text-shadow: 0 0 10px var(--accent-blood);
+            box-shadow: 0 0 20px rgba(138, 3, 3, 0.4);
+        }
+
+        .btn-ui::before {
+            content: '⚔';
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        /* --- Секция Hero (Параллакс) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(26,22,18,0.3), var(--bg-color)), 
+                        url('https://images.unsplash.com/photo-1505832018823-50331d70d237?auto=format&fit=crop&w=1920&q=80'); /* Заглушка кладбища */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 20px;
+        }
+
+        /* Микро-анимации: Туман и Пепел */
+        .fog {
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 200px;
+            background: linear-gradient(to top, rgba(100,100,100,0.2), transparent);
+            animation: fogMove 10s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes fogMove {
+            from { opacity: 0.3; transform: translateX(-5%); }
+            to { opacity: 0.6; transform: translateX(5%); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+            color: var(--paper-color);
+        }
+
+        /* --- Секция Наследие (Свиток) --- */
+        .lore-section {
+            padding: 100px 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .scroll {
+            background: #c2b280;
+            color: #2b2622;
+            padding: 60px;
+            max-width: 800px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            border-left: 20px solid #a6915d;
+            border-right: 20px solid #a6915d;
+            clip-path: polygon(0% 2%, 100% 0%, 100% 98%, 0% 100%);
+        }
+
+        .scroll h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        /* --- Секция Механики --- */
+        .mechanics {
+            padding: 80px 20px;
+            background: #15120f;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #1e1a16;
+            border: 2px solid var(--stone-border);
+            padding: 30px;
+            text-align: center;
+            transition: 0.4s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-blood);
+        }
+
+        .card i {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 15px;
+            filter: sepia(1) saturate(2);
+        }
+
+        /* --- Сообщество (Надгробия) --- */
+        .community {
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .tombstone-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .tombstone {
+            width: 280px;
+            height: 380px;
+            background: #3d3d3d;
+            border-radius: 140px 140px 0 0;
+            padding: 80px 30px 20px;
+            position: relative;
+            border: 4px solid #2a2a2a;
+            box-shadow: inset 0 10px 20px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+
+        .tombstone:hover {
+            background: #4a4a4a;
+            transform: scale(1.05);
+        }
+
+        .tombstone blockquote {
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        .tombstone .epitaph-name {
+            margin-top: 20px;
+            display: block;
+            font-weight: bold;
+            color: #888;
+        }
+
+        /* --- Футер --- */
+        footer {
+            padding: 60px 20px;
+            border-top: 1px solid var(--stone-border);
+            text-align: center;
+            background: #0d0b09;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--stone-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .icon-box:hover {
+            border-color: var(--accent-blood);
+            color: var(--accent-blood);
+        }
+
+        /* --- Адаптивность --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .scroll { padding: 30px; border-width: 10px; }
+            .tombstone { width: 100%; height: auto; border-radius: 20px; padding: 40px; }
+        }
+
+        /* Плавное появление при скролле */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s all ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="fog"></div>
+        <h1 class="gothic-title">Мертвые не умирают.</h1>
+        <h1 class="gothic-title" style="font-size: 3rem; margin-top: -20px;">Они строят новый мир</h1>
+        <p class="cinzel">Изометрическая MMORPG-песочница в мире разумной нежити и голодных монстров</p>
+        <a href="#" class="btn-ui cinzel">Начать выживание</a>
+    </section>
+
+    <!-- Lore Section -->
+    <section class="lore-section reveal">
+        <div class="scroll">
+            <h2 class="cinzel">Наследие Первого Прахa</h2>
+            <p>Когда последний бог покинул этот мир, земля не опустела. Мы, лишенные дыхания, но наделенные волей, восстали из руин. В этом мире смерть — лишь начало долгого пути строительства. </p>
+            <br>
+            <p>Фракция <strong>Шепчущих Костей</strong> стремится восстановить древние библиотеки, в то время как <strong>Кровавый Легион</strong> жаждет подчинить себе дикие болота. На чьей стороне будешь ты?</p>
+        </div>
+    </section>
+
+    <!-- Mechanics Section -->
+    <section class="mechanics reveal">
+        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 50px;">Механики Мира</h2>
+        <div class="grid">
+            <div class="card">
+                <i>🏰</i>
+                <h3 class="cinzel">Создай свой некрополь</h3>
+                <p>Возводи стены из проклятого камня, которые простоят вечность.</p>
+            </div>
+            <div class="card">
+                <i>🗡️</i>
+                <h3 class="cinzel">Оружие из праха</h3>
+                <p>Ковка артефактов, используя души павших врагов в качестве закалки.</p>
+            </div>
+            <div class="card">
+                <i>⚖️</i>
+                <h3 class="cinzel">Торговля Костями</h3>
+                <p>Уникальная экономика, где валюта — это время и останки.</p>
+            </div>
+            <div class="card">
+                <i>💀</i>
+                <h3 class="cinzel">PvP Осады</h3>
+                <p>Захватывай чужие зиккураты в масштабных изометрических битвах.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="community reveal">
+        <h2 class="gothic-title" style="font-size: 3rem;">Голоса из Бездны</h2>
+        <div class="tombstone-grid">
+            <div class="tombstone">
+                <blockquote>"Я пришел сюда за золотом, а остался вечным стражем ворот. Лучшая RPG за последние века."</blockquote>
+                <span class="epitaph-name">— Skel_Rider_99</span>
+            </div>
+            <div class="tombstone" style="background: #2e2e2e;">
+                <h3 class="cinzel" style="margin-bottom: 15px;">Discord</h3>
+                <p>Присоединяйся к совету мертвых</p>
+                <br>
+                <a href="#" class="btn-ui cinzel" style="padding: 10px 20px;">Войти</a>
+            </div>
+            <div class="tombstone">
+                <blockquote>"Анимация магии здесь пахнет серой и величием. Построил свой замок за неделю."</blockquote>
+                <span class="epitaph-name">— NecroMaster</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-icons">
+            <a href="#" class="icon-box">VK</a>
+            <a href="#" class="icon-box">TG</a>
+            <a href="#" class="icon-box">YT</a>
+        </div>
+        <p class="cinzel" style="opacity: 0.6;">&copy; 2024 МЕРТВЫЕ НЕ УМИРАЮТ. Все права защищены прахом.</p>
+    </footer>
+
+    <script>
+        // Простая анимация появления при прокрутке
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+
+        // Параллакс эффект для фона Hero
+        window.addEventListener('scroll', function() {
+            const scroll = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            hero.style.backgroundPositionY = -(scroll * 0.5) + 'px';
+        });
+
+        // Эффект пульсации для "света в окне" (имитация через JS для Hero)
+        setInterval(() => {
+            const hero = document.querySelector('.hero');
+            const opacity = 0.3 + Math.random() * 0.1;
+            hero.style.backgroundColor = `rgba(26,22,18,${opacity})`;
+        }, 1000);
+    </script>
+</body>
+</html>
