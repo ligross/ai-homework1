@@ -4,14 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мертвые не умирают — MMORPG</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Мертвые не умирают - изометрическая MMORPG-песочница в мире разумной нежити. Строй некрополи, торгуй костями, участвуй в PvP осадах">
+    <meta name="keywords" content="MMORPG, зомби, песочница, изометрическая игра, некрополь, PvP">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Мертвые не умирают — MMORPG">
+    <meta property="og:description" content="Изометрическая MMORPG-песочница в мире разумной нежити">
+    <meta property="og:image" content="https://ligross.github.io/ai-homework1/assets/og-image.jpg">
+    <meta property="og:url" content="https://ligross.github.io/ai-homework1/">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Мертвые не умирают — MMORPG">
+    <meta name="twitter:description" content="Изометрическая MMORPG-песочница в мире разумной нежити">
+    <meta name="twitter:image" content="https://ligross.github.io/ai-homework1/assets/twitter-card.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    
+    <!-- Preconnect для оптимизации загрузки шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;700&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+    
+    <!-- SEO оптимизация -->
+    <link rel="canonical" href="https://ligross.github.io/ai-homework1/">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Dead Don't Die Studios">
+    
+    <!-- Schema.org разметка для VideoGame -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "VideoGame",
+      "name": "Мертвые не умирают",
+      "genre": "MMORPG",
+      "description": "Изометрическая MMORPG-песочница в мире разумной нежити",
+      "gamePlatform": ["PC"],
+      "playMode": "MultiPlayer"
+    }
+    </script>
     <style>
         :root {
             --bg-color: #1a1612;
             --paper-color: #d3c4a9;
             --accent-blood: #8a0303;
             --accent-magic: #4b0082;
-            --text-color: #c0b095;
+            --text-color: #d4c5a6; /* Улучшенная контрастность для WCAG AA */
             --stone-border: #4a453f;
         }
 
@@ -55,6 +98,8 @@
             display: inline-flex;
             align-items: center;
             padding: 15px 35px;
+            min-height: 44px; /* Touch-friendly размер */
+            min-width: 44px;
             background: #2a2520;
             border: 3px solid var(--stone-border);
             color: var(--paper-color);
@@ -171,11 +216,37 @@
             text-align: center;
             transition: 0.4s;
             position: relative;
+            overflow: hidden;
         }
 
         .card:hover {
             transform: translateY(-10px);
             border-color: var(--accent-blood);
+            box-shadow: 0 10px 30px rgba(138, 3, 3, 0.3);
+        }
+
+        /* Эффект свечения для карточек */
+        .card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(138, 3, 3, 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: cardShine 6s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes cardShine {
+            0%, 100% { transform: translateX(-100%) rotate(45deg); }
+            50% { transform: translateX(100%) rotate(45deg); }
         }
 
         .card i {
@@ -278,12 +349,497 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* CSS-анимация пульсации для Hero вместо JS */
+        @keyframes heroGlow {
+            0%, 100% {
+                background-color: rgba(26,22,18,0.3);
+            }
+            50% {
+                background-color: rgba(26,22,18,0.4);
+            }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(26,22,18,0.3);
+            animation: heroGlow 2s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Skip-to-content ссылка для доступности */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-blood);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Навигационное меню */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            background: rgba(26,22,18,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--stone-border);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            text-decoration: none;
+            color: var(--paper-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent-blood);
+            text-shadow: 0 0 10px var(--accent-blood);
+        }
+
+        .nav-cta {
+            padding: 10px 25px;
+            font-size: 0.85rem;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background: var(--bg-color);
+            margin: 10% auto;
+            padding: 40px;
+            border: 3px solid var(--stone-border);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px; top: 10px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .close:hover {
+            color: var(--accent-blood);
+        }
+
+        #signup-form input {
+            width: 100%;
+            padding: 15px;
+            margin: 20px 0;
+            background: #2a2520;
+            border: 2px solid var(--stone-border);
+            color: var(--text-color);
+            font-family: 'Cinzel', serif;
+        }
+
+        .modal-note {
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-top: 15px;
+        }
+
+        /* Гамбургер-меню */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            background: none;
+            border: none;
+            padding: 10px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-color);
+            transition: 0.3s;
+            display: block;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Улучшенная доступность - focus-visible */
+        *:focus-visible {
+            outline: 3px solid var(--accent-blood);
+            outline-offset: 2px;
+        }
+
+        /* Стили для новых секций */
+        .gallery-section, .roadmap-section, .faq-section, .classes-section, .stats-section {
+            padding: 100px 20px;
+        }
+
+        .gallery-section {
+            background: #15120f;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 50px auto 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--stone-border);
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-blood);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Roadmap стили */
+        .timeline {
+            max-width: 900px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--stone-border);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: #1e1a16;
+            padding: 30px;
+            border: 2px solid var(--stone-border);
+            position: relative;
+        }
+
+        .timeline-date {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-blood);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* FAQ Аккордеон */
+        .faq-container {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        .faq-item {
+            background: #1e1a16;
+            border: 2px solid var(--stone-border);
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 20px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--accent-blood);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: 0.3s;
+        }
+
+        .faq-question.active::after {
+            content: '−';
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding: 0 20px 20px;
+        }
+
+        /* Классы/Фракции */
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 50px auto;
+        }
+
+        .class-card {
+            background: #1e1a16;
+            border: 2px solid var(--stone-border);
+            padding: 30px;
+            text-align: center;
+            transition: 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .class-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-magic);
+            box-shadow: 0 10px 30px rgba(75, 0, 130, 0.3);
+        }
+
+        .class-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* Статистика */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 50px auto;
+        }
+
+        .stat-box {
+            background: #1e1a16;
+            border: 2px solid var(--stone-border);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            color: var(--accent-blood);
+            font-weight: bold;
+            font-family: 'Cinzel', serif;
+        }
+
+        .stat-label {
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        /* Социальные кнопки "Поделиться" */
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .share-btn {
+            width: 44px;
+            height: 44px;
+            border: 2px solid var(--stone-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .share-btn:hover {
+            border-color: var(--accent-blood);
+            color: var(--accent-blood);
+            transform: scale(1.1);
+        }
+
+        /* Адаптивное меню для мобильных */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 60px;
+                flex-direction: column;
+                background: rgba(26,22,18,0.98);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                padding: 20px 0;
+                border-top: 2px solid var(--stone-border);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+            
+            .hero {
+                padding-top: 80px;
+                height: 100dvh; /* iOS fix */
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+            }
+
+            .timeline-content {
+                width: 100%;
+                margin-left: 40px;
+            }
+
+            .timeline-date {
+                left: 20px;
+                transform: translateX(0);
+            }
+        }
+
+        /* Отступ для секций из-за фиксированного меню */
+        section {
+            scroll-margin-top: 80px;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Skip-to-content ссылка для доступности -->
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+
+    <!-- Навигационное меню -->
+    <nav class="navbar" role="navigation" aria-label="Главная навигация">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo gothic-title" aria-label="Мертвые не умирают - Главная">МНУ</a>
+            <button class="hamburger" aria-label="Открыть меню" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" role="menubar">
+                <li role="none"><a href="#hero" class="nav-link cinzel" role="menuitem">Главная</a></li>
+                <li role="none"><a href="#lore" class="nav-link cinzel" role="menuitem">Лор</a></li>
+                <li role="none"><a href="#mechanics" class="nav-link cinzel" role="menuitem">Механики</a></li>
+                <li role="none"><a href="#community" class="nav-link cinzel" role="menuitem">Сообщество</a></li>
+            </ul>
+            <button class="nav-cta btn-ui cinzel" aria-label="Начать играть">Играть</button>
+        </div>
+    </nav>
+
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="fog"></div>
         <h1 class="gothic-title">Мертвые не умирают.</h1>
         <h1 class="gothic-title" style="font-size: 3rem; margin-top: -20px;">Они строят новый мир</h1>
@@ -292,9 +848,9 @@
     </section>
 
     <!-- Lore Section -->
-    <section class="lore-section reveal">
-        <div class="scroll">
-            <h2 class="cinzel">Наследие Первого Прахa</h2>
+    <section class="lore-section reveal" id="lore">
+        <div class="scroll" id="main-content">
+            <h2 class="cinzel">Наследие Первого Праха</h2>
             <p>Когда последний бог покинул этот мир, земля не опустела. Мы, лишенные дыхания, но наделенные волей, восстали из руин. В этом мире смерть — лишь начало долгого пути строительства. </p>
             <br>
             <p>Фракция <strong>Шепчущих Костей</strong> стремится восстановить древние библиотеки, в то время как <strong>Кровавый Легион</strong> жаждет подчинить себе дикие болота. На чьей стороне будешь ты?</p>
@@ -302,34 +858,200 @@
     </section>
 
     <!-- Mechanics Section -->
-    <section class="mechanics reveal">
+    <section class="mechanics reveal" id="mechanics">
         <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 50px;">Механики Мира</h2>
         <div class="grid">
             <div class="card">
-                <i>🏰</i>
+                <i role="img" aria-label="Замок">🏰</i>
                 <h3 class="cinzel">Создай свой некрополь</h3>
                 <p>Возводи стены из проклятого камня, которые простоят вечность.</p>
             </div>
             <div class="card">
-                <i>🗡️</i>
+                <i role="img" aria-label="Меч">🗡️</i>
                 <h3 class="cinzel">Оружие из праха</h3>
                 <p>Ковка артефактов, используя души павших врагов в качестве закалки.</p>
             </div>
             <div class="card">
-                <i>⚖️</i>
+                <i role="img" aria-label="Весы">⚖️</i>
                 <h3 class="cinzel">Торговля Костями</h3>
                 <p>Уникальная экономика, где валюта — это время и останки.</p>
             </div>
             <div class="card">
-                <i>💀</i>
+                <i role="img" aria-label="Череп">💀</i>
                 <h3 class="cinzel">PvP Осады</h3>
                 <p>Захватывай чужие зиккураты в масштабных изометрических битвах.</p>
             </div>
         </div>
     </section>
 
+    <!-- Statistics Section -->
+    <section class="stats-section reveal" id="stats">
+        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 20px;">Мир Живёт</h2>
+        <p class="cinzel" style="text-align: center; opacity: 0.7;">Статистика нашего мира нежити</p>
+        <div class="stats-grid">
+            <div class="stat-box reveal">
+                <div class="stat-number" data-count="15420">0</div>
+                <div class="stat-label">Восставших душ</div>
+            </div>
+            <div class="stat-box reveal">
+                <div class="stat-number" data-count="3428">0</div>
+                <div class="stat-label">Некрополей</div>
+            </div>
+            <div class="stat-box reveal">
+                <div class="stat-number" data-count="12847">0</div>
+                <div class="stat-label">Осад замков</div>
+            </div>
+            <div class="stat-box reveal">
+                <div class="stat-number" data-count="892134">0</div>
+                <div class="stat-label">Косточек добыто</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section reveal" id="gallery">
+        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 20px;">Мир в Скриншотах</h2>
+        <p class="cinzel" style="text-align: center; opacity: 0.7;">Загляни в царство вечной ночи</p>
+        <div class="gallery-grid">
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?w=600&h=400&fit=crop" alt="Некрополь при свете луны" loading="lazy">
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=600&h=400&fit=crop" alt="Битва с боссом" loading="lazy">
+            </div>
+            <div class="gallery-item reveal">
+                <img src="https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?w=600&h=400&fit=crop" alt="Подземелье" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Classes/Factions Section -->
+    <section class="classes-section reveal" id="classes">
+        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 20px;">Фракции</h2>
+        <p class="cinzel" style="text-align: center; opacity: 0.7;">Выбери свою сторону в войне</p>
+        <div class="classes-grid">
+            <div class="class-card reveal">
+                <span class="class-icon">💀</span>
+                <h3 class="cinzel">Шёпот Костей</h3>
+                <p style="margin-top: 15px;">Хранители древних знаний. Восстанавливают библиотеки и исследуют забытые тайны.</p>
+                <ul style="margin-top: 15px; text-align: left; padding-left: 20px;">
+                    <li>Магия некромантии</li>
+                    <li>Интеллект +5</li>
+                    <li>Защита союзников</li>
+                </ul>
+            </div>
+            <div class="class-card reveal">
+                <span class="class-icon">🩸</span>
+                <h3 class="cinzel">Кровавый Легион</h3>
+                <p style="margin-top: 15px;">Завоеватели болот. Жаждут власти и подчиняют дикие земли.</p>
+                <ul style="margin-top: 15px; text-align: left; padding-left: 20px;">
+                    <li>Боевая ярость</li>
+                    <li>Сила +5</li>
+                    <li>Атака без предупреждения</li>
+                </ul>
+            </div>
+            <div class="class-card reveal">
+                <span class="class-icon">🕷️</span>
+                <h3 class="cinzel">Теневое Братство</h3>
+                <p style="margin-top: 15px;">Мастера скрытности. Добывают ресурсы из тени.</p>
+                <ul style="margin-top: 15px; text-align: left; padding-left: 20px;">
+                    <li>Скорость +3</li>
+                    <li>Кража ресурсов</li>
+                    <li>Невидимость</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="roadmap-section reveal" id="roadmap">
+        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 20px;">Дорожная Карта</h2>
+        <p class="cinzel" style="text-align: center; opacity: 0.7;">Путь к бессмертию</p>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <h3 class="cinzel">Альфа-Тест</h3>
+                    <p>Базовая механика строительства некрополей.PvP арена.Система крафта оружия из праха.</p>
+                </div>
+                <div class="timeline-date">Q1 2025</div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <h3 class="cinzel">Бета-Тест</h3>
+                    <p>Две основные фракции.Экономика торговли костями.Система осад замков.Первые подземелья.</p>
+                </div>
+                <div class="timeline-date">Q2 2025</div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <h3 class="cinzel">Ранний Доступ</h3>
+                    <p>Открытый мир.Клановая система.Рейдовые боссы.Турнирная таблица.</p>
+                </div>
+                <div class="timeline-date">Q4 2025</div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-content">
+                    <h3 class="cinzel">Полный Релиз</h3>
+                    <p>Все локации.Серверные осады.Система гильдий.Баланс и оптимизация.</p>
+                </div>
+                <div class="timeline-date">2026</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section reveal" id="faq">
+        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 20px;">Тайны и Вопросы</h2>
+        <p class="cinzel" style="text-align: center; opacity: 0.7;">Ответы на частые вопросы</p>
+        <div class="faq-container">
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq1">
+                    Бесплатная ли игра?
+                </button>
+                <div class="faq-answer" id="faq1">
+                    <p>Да, "Мертвые не умирают" полностью бесплатная MMORPG. Мы зарабатываем на косметических предметах и VIP-статусе, которые не дают преимущества в PvP.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq2">
+                    Какие платформы поддерживаются?
+                </button>
+                <div class="faq-answer" id="faq2">
+                    <p>Игра доступна на PC (Windows, macOS, Linux). Консольные версии планируются после релиза.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq3">
+                    Будет ли PvE контент?
+                </button>
+                <div class="faq-answer" id="faq3">
+                    <p>Конечно! Помимо PvP осад, вас ждут рейдовые боссы, подземелья с редкими лутом, квесты и мировые события.</p>
+                </div>
+            </div>
+            <div class="faq-item reveal">
+                <button class="faq-question" aria-expanded="false" aria-controls="faq4">
+                    Как присоединиться к бета-тесту?
+                </button>
+                <div class="faq-answer" id="faq4">
+                    <p>Оставьте email в форме регистрации. Мы регулярно рассылаем приглашения по мере приближения к этапу тестирования.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Share Buttons -->
+    <section style="padding: 60px 20px; text-align: center;">
+        <h3 class="cinzel" style="margin-bottom: 20px;">Поделиться с друзьями</h3>
+        <div class="share-buttons">
+            <a href="https://vk.com/share.php?url=https://ligross.github.io/ai-homework1/" class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в ВКонтакте">VK</a>
+            <a href="https://t.me/share/url?url=https://ligross.github.io/ai-homework1/&text=Мертвые не умирают - MMORPG" class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в Telegram">TG</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://ligross.github.io/ai-homework1/" class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в Facebook">FB</a>
+            <a href="https://twitter.com/intent/tweet?url=https://ligross.github.io/ai-homework1/&text=Мертвые не умирают - MMORPG" class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в Twitter">X</a>
+        </div>
+    </section>
+
     <!-- Community Section -->
-    <section class="community reveal">
+    <section class="community reveal" id="community">
         <h2 class="gothic-title" style="font-size: 3rem;">Голоса из Бездны</h2>
         <div class="tombstone-grid">
             <div class="tombstone">
@@ -340,7 +1062,7 @@
                 <h3 class="cinzel" style="margin-bottom: 15px;">Discord</h3>
                 <p>Присоединяйся к совету мертвых</p>
                 <br>
-                <a href="#" class="btn-ui cinzel" style="padding: 10px 20px;">Войти</a>
+                <a href="https://discord.gg/your-server-invite" class="btn-ui cinzel" style="padding: 10px 20px;" target="_blank" rel="noopener noreferrer">Войти</a>
             </div>
             <div class="tombstone">
                 <blockquote>"Анимация магии здесь пахнет серой и величием. Построил свой замок за неделю."</blockquote>
@@ -352,42 +1074,224 @@
     <!-- Footer -->
     <footer>
         <div class="social-icons">
-            <a href="#" class="icon-box">VK</a>
-            <a href="#" class="icon-box">TG</a>
-            <a href="#" class="icon-box">YT</a>
+            <a href="https://vk.com/your-group" class="icon-box" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте">VK</a>
+            <a href="https://t.me/your-channel" class="icon-box" target="_blank" rel="noopener noreferrer" aria-label="Telegram">TG</a>
+            <a href="https://youtube.com/@your-channel" class="icon-box" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YT</a>
         </div>
         <p class="cinzel" style="opacity: 0.6;">&copy; 2024 МЕРТВЫЕ НЕ УМИРАЮТ. Все права защищены прахом.</p>
     </footer>
 
+    <!-- Модальное окно регистрации -->
+    <div id="signup-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 class="cinzel">Восстань из праха</h2>
+            <form id="signup-form">
+                <input type="email" placeholder="Твой email" required>
+                <button type="submit" class="btn-ui cinzel">Присоединиться</button>
+            </form>
+            <p class="modal-note">Мы пришлем приглашение на бета-тест</p>
+        </div>
+    </div>
+
     <script>
-        // Простая анимация появления при прокрутке
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
+        // ============ INTERSECTION OBSERVER API (оптимизация производительности) ============
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Анимация счётчиков при появлении
+                    if (entry.target.classList.contains('stat-box')) {
+                        animateCounters(entry.target);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ============ АНИМАЦИЯ СЧЁТЧИКОВ ============
+        function animateCounters(element) {
+            const counter = element.querySelector('.stat-number');
+            if (!counter || counter.dataset.animated === 'true') return;
+            
+            counter.dataset.animated = 'true';
+            const target = parseInt(counter.dataset.count);
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            function updateCounter() {
+                current += step;
+                if (current < target) {
+                    counter.textContent = Math.floor(current).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target.toLocaleString();
                 }
             }
+            updateCounter();
         }
 
-        window.addEventListener("scroll", reveal);
-
-        // Параллакс эффект для фона Hero
+        // ============ ПАРАЛЛАКС С REQUESTANIMATIONFRAME ============
+        let ticking = false;
         window.addEventListener('scroll', function() {
-            const scroll = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            hero.style.backgroundPositionY = -(scroll * 0.5) + 'px';
+            if (!ticking) {
+                window.requestAnimationFrame(function() {
+                    const scroll = window.pageYOffset;
+                    const hero = document.querySelector('.hero');
+                    if (hero) {
+                        hero.style.backgroundPositionY = -(scroll * 0.5) + 'px';
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
 
-        // Эффект пульсации для "света в окне" (имитация через JS для Hero)
-        setInterval(() => {
-            const hero = document.querySelector('.hero');
-            const opacity = 0.3 + Math.random() * 0.1;
-            hero.style.backgroundColor = `rgba(26,22,18,${opacity})`;
-        }, 1000);
+        // ============ ГАМБУРГЕР-МЕНЮ ============
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // ============ FAQ АККОРДЕОН ============
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                const isActive = this.classList.contains('active');
+                
+                // Закрыть все ответы
+                faqQuestions.forEach(q => {
+                    q.classList.remove('active');
+                    q.setAttribute('aria-expanded', 'false');
+                    q.nextElementSibling.classList.remove('active');
+                });
+                
+                // Открыть текущий если был неактивен
+                if (!isActive) {
+                    this.classList.add('active');
+                    this.setAttribute('aria-expanded', 'true');
+                    answer.classList.add('active');
+                }
+            });
+        });
+
+        // ============ МОДАЛЬНОЕ ОКНО ============
+        const modal = document.getElementById('signup-modal');
+        const heroBtn = document.querySelector('.hero .btn-ui');
+        const navBtn = document.querySelector('.nav-cta');
+        const span = document.querySelector('.close');
+
+        function openModal(e) {
+            e.preventDefault();
+            modal.style.display = 'block';
+            modal.setAttribute('aria-hidden', 'false');
+        }
+
+        heroBtn.addEventListener('click', openModal);
+        navBtn.addEventListener('click', openModal);
+
+        function closeModal() {
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        if (span) span.addEventListener('click', closeModal);
+
+        window.addEventListener('click', function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        });
+
+        // ============ ФОРМА РЕГИСТРАЦИИ ============
+        const signupForm = document.getElementById('signup-form');
+        if (signupForm) {
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Спасибо! Мы отправим приглашение на бета-тест.');
+                closeModal();
+                this.reset();
+            });
+        }
+
+        // ============ ПЛАВНАЯ ПРОКРУТКА ============
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '#signup-modal' && href !== null) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // ============ ИНДИКАТОР АКТИВНОЙ СЕКЦИИ ============
+        const sections = document.querySelectorAll('section[id]');
+        const navLinkElements = document.querySelectorAll('.nav-link');
+
+        function updateActiveNav() {
+            const scrollPos = window.scrollY + 100;
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinkElements.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Используем Intersection Observer для индикатора активной секции
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinkElements.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${entry.target.id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => navObserver.observe(section));
     </script>
 </body>
 </html>

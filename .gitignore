@@ -1,0 +1,15 @@
+# Зависимости
+node_modules/
+venv/
+__pycache__/
+
+# IDE
+.idea/
+.vscode/
+
+# Логи
+*.log
+
+# Переменные окружения
+.env
+.env.local
