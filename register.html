@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Регистрация | Мертвые не умирают</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#8b0000",
+                        gold: "#c5a059",
+                        "background-dark": "#0a0908",
+                        "stone-dark": "#161412",
+                    },
+                    fontFamily: {
+                        display: ["Cinzel", "serif"],
+                        serif: ["Playfair Display", "serif"],
+                        sans: ["Roboto", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+    
+    <style>
+        body {
+            background-color: #0a0908;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+        
+        .necropolis-bg {
+            background: linear-gradient(rgba(10, 9, 8, 0.6), rgba(10, 9, 8, 0.8)), 
+                        url('https://images.unsplash.com/photo-1505635330303-3195307bc64c?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            filter: blur(4px) brightness(0.7);
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+        
+        .mist-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(10, 9, 8, 0.4) 100%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .ember {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ff4d00;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ff4d00;
+            opacity: 0.6;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); opacity: 0.6; }
+            50% { transform: translateY(-20px); opacity: 0.3; }
+        }
+        
+        .stone-card {
+            background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png'), 
+                              linear-gradient(135deg, #1a1816 0%, #0d0c0b 100%);
+            border: 1px solid rgba(197, 160, 89, 0.15);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 0 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .stone-card::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(to bottom, rgba(197, 160, 89, 0.3), transparent 30%, transparent 70%, rgba(139, 0, 0, 0.2));
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .blood-seal-btn {
+            background: linear-gradient(to bottom, #a00000, #660000);
+            box-shadow: inset 0 0 10px rgba(255, 0, 0, 0.2), 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .blood-seal-btn:hover {
+            background: linear-gradient(to bottom, #bc0000, #7a0000);
+            box-shadow: inset 0 0 15px rgba(255, 100, 100, 0.3), 0 0 20px rgba(139, 0, 0, 0.4);
+            transform: scale(1.02);
+        }
+        
+        .input-gothic {
+            background: rgba(10, 9, 8, 0.6);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .input-gothic:focus {
+            background: rgba(20, 18, 16, 0.8);
+            border-color: #c5a059;
+            box-shadow: 0 0 10px rgba(197, 160, 89, 0.1);
+            outline: none;
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24;
+        }
+    </style>
+</head>
+<body class="font-sans flex items-center justify-center min-h-screen relative p-4">
+    <div class="necropolis-bg"></div>
+    <div class="mist-overlay"></div>
+    
+    <!-- Ember particles -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0 opacity-40">
+        <div class="ember" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="ember" style="top: 45%; left: 85%; animation-delay: 0.5s;"></div>
+        <div class="ember" style="top: 70%; left: 30%; animation-delay: 1s;"></div>
+        <div class="ember" style="top: 15%; left: 60%; animation-delay: 1.5s;"></div>
+        <div class="ember" style="top: 85%; left: 75%; animation-delay: 2s;"></div>
+    </div>
+    
+    <main class="w-full max-w-md z-10">
+        <div class="stone-card rounded-sm overflow-hidden p-8 md:p-12">
+            <!-- Header -->
+            <div class="flex flex-col items-center mb-10 relative">
+                <div class="mb-4 relative group">
+                    <span class="material-symbols-outlined text-6xl text-gold opacity-80 group-hover:opacity-100 transition-opacity">
+                        skull
+                    </span>
+                    <span class="material-symbols-outlined absolute -top-1 -left-2 text-2xl text-gold/40 rotate-[-45deg]">eco</span>
+                    <span class="material-symbols-outlined absolute -bottom-1 -right-2 text-2xl text-gold/40 rotate-[135deg]">eco</span>
+                </div>
+                <h1 class="font-display text-2xl text-gold tracking-[0.2em] text-center uppercase">
+                    Восхождение
+                </h1>
+                <div class="w-24 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent mt-2"></div>
+            </div>
+            
+            <!-- Registration Form -->
+            <form id="register-form" class="space-y-6">
+                <div>
+                    <label class="block font-serif italic text-gold/70 text-sm mb-2 ml-1" for="email">
+                        Дыхание души (Email)
+                    </label>
+                    <input class="w-full input-gothic px-4 py-3 text-gray-200 font-serif placeholder-gray-600 rounded-none border" 
+                           id="email" 
+                           placeholder="your-soul@eternal.com" 
+                           type="email"/>
+                </div>
+                <div>
+                    <label class="block font-serif italic text-gold/70 text-sm mb-2 ml-1" for="username">
+                        Имя в вечности (Username)
+                    </label>
+                    <input class="w-full input-gothic px-4 py-3 text-gray-200 font-serif placeholder-gray-600 rounded-none border" 
+                           id="username" 
+                           placeholder="Morbid_Exile" 
+                           type="text"/>
+                </div>
+                <div>
+                    <label class="block font-serif italic text-gold/70 text-sm mb-2 ml-1" for="password">
+                        Тайный шифр (Password)
+                    </label>
+                    <input class="w-full input-gothic px-4 py-3 text-gray-200 font-serif placeholder-gray-600 rounded-none border" 
+                           id="password" 
+                           placeholder="••••••••" 
+                           type="password"/>
+                </div>
+                <div class="pt-4">
+                    <button class="w-full blood-seal-btn py-4 font-display text-white tracking-[0.3em] text-sm font-bold uppercase rounded-sm border border-red-900/50" type="submit">
+                        Пробудиться
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Social Login -->
+            <div class="mt-10">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="flex-1 h-px bg-gold/10"></div>
+                    <span class="font-serif italic text-xs text-gray-500 uppercase tracking-widest">Клятвы крови</span>
+                    <div class="flex-1 h-px bg-gold/10"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <button class="flex items-center justify-center space-x-2 bg-stone-dark/40 border border-white/5 py-2.5 hover:bg-stone-dark/60 hover:border-gold/20 transition-all rounded-sm">
+                        <span class="font-display text-[10px] tracking-widest text-gray-400">DISCORD</span>
+                    </button>
+                    <button class="flex items-center justify-center space-x-2 bg-stone-dark/40 border border-white/5 py-2.5 hover:bg-stone-dark/60 hover:border-gold/20 transition-all rounded-sm">
+                        <span class="font-display text-[10px] tracking-widest text-gray-400">VKONTAKTE</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Login Link -->
+            <div class="mt-8 text-center">
+                <p class="font-serif text-xs text-gray-500 italic">
+                    Уже числитесь в рядах павших? 
+                    <a class="text-gold/60 hover:text-gold transition-colors ml-1 border-b border-gold/20" href="#">Войти в склеп</a>
+                </p>
+            </div>
+        </div>
+        
+        <!-- Back to Main Link -->
+        <div class="mt-6 text-center">
+            <a class="font-display text-[10px] tracking-[0.3em] text-gray-600 hover:text-gold/50 transition-colors uppercase flex items-center justify-center space-x-2" href="index.html">
+                <span class="material-symbols-outlined text-sm">arrow_back</span>
+                <span>Вернуться в мир</span>
+            </a>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="fixed bottom-6 left-0 w-full text-center pointer-events-none opacity-30">
+        <p class="font-display text-[9px] tracking-[0.5em] text-gold uppercase">&copy; MMXXIV The Dead Don't Die</p>
+    </footer>
+    
+    <script>
+        // Test mode form submission
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Show success message (test mode)
+            alert('Тестовый режим: Регистрация успешна!\n\nEmail: ' + (email || 'не указан') + '\nИмя: ' + (username || 'не указано') + '\n\nВы можете перейти в личный кабинет.');
+            
+            // Redirect to profile after "registration"
+            window.location.href = 'profile.html';
+        });
+    </script>
+</body>
+</html>

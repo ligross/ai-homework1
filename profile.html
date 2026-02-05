@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html class="dark" lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Личный кабинет | Мертвые не умирают</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#c5a059",
+                        "background-dark": "#181611",
+                        "rarity-common": "#b9b29d",
+                        "rarity-rare": "#3b82f6",
+                        "rarity-epic": "#c5a059",
+                    },
+                    fontFamily: {
+                        "display": ["Cinzel", "serif"],
+                        "sans": ["Roboto", "sans-serif"]
+                    },
+                },
+            },
+        };
+    </script>
+    
+    <style>
+        body {
+            background-color: #181611;
+        }
+        
+        .gothic-gradient {
+            background: linear-gradient(180deg, rgba(24, 22, 17, 0.9) 0%, rgba(10, 10, 10, 0.95) 100%);
+        }
+        
+        .paper-doll-bg {
+            background: radial-gradient(circle, rgba(197, 160, 89, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+        
+        .slot-border-gold {
+            border: 1px solid #c5a059;
+            box-shadow: inset 0 0 10px rgba(197, 160, 89, 0.2);
+        }
+        
+        .slot-border-silver {
+            border: 1px solid #b9b29d;
+            box-shadow: inset 0 0 10px rgba(185, 178, 157, 0.1);
+        }
+        
+        .fluid-glow-red {
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
+        }
+        
+        .fluid-glow-blue {
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+        }
+        
+        .item-glow-epic {
+            filter: drop-shadow(0 0 8px #c5a059);
+        }
+        
+        .item-glow-rare {
+            filter: drop-shadow(0 0 8px #3b82f6);
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(197, 160, 89, 0.3);
+            border-radius: 2px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(197, 160, 89, 0.5);
+        }
+        
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        }
+    </style>
+</head>
+<body class="font-sans bg-background-dark text-white overflow-hidden h-screen">
+    
+    <!-- Atmospheric Background Wrapper -->
+    <div class="relative h-full w-full flex bg-[url('https://images.unsplash.com/photo-1599423300746-b62533397364?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+        
+        <!-- Left Navigation Rail -->
+        <aside class="relative z-10 w-20 flex flex-col items-center py-6 border-r border-white/10 bg-black/40 backdrop-blur-md">
+            <div class="mb-10">
+                <a href="index.html" class="size-12 rounded bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(197,160,89,0.5)] hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-background-dark text-3xl font-bold">skull</span>
+                </a>
+            </div>
+            <nav class="flex flex-col gap-6">
+                <button class="p-3 rounded bg-primary/20 text-primary border border-primary/30" title="Профиль">
+                    <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1">person</span>
+                </button>
+                <button class="p-3 rounded text-white/50 hover:text-primary transition-colors" title="Инвентарь">
+                    <span class="material-symbols-outlined text-3xl">inventory_2</span>
+                </button>
+                <button class="p-3 rounded text-white/50 hover:text-primary transition-colors" title="Навыки">
+                    <span class="material-symbols-outlined text-3xl">bolt</span>
+                </button>
+                <button class="p-3 rounded text-white/50 hover:text-primary transition-colors" title="Квесты">
+                    <span class="material-symbols-outlined text-3xl">auto_stories</span>
+                </button>
+                <button class="p-3 rounded text-white/50 hover:text-primary transition-colors" title="Карта">
+                    <span class="material-symbols-outlined text-3xl">map</span>
+                </button>
+            </nav>
+            <div class="mt-auto flex flex-col gap-4">
+                <a href="index.html" class="p-3 rounded text-white/30 hover:text-white transition-colors" title="На главную">
+                    <span class="material-symbols-outlined text-3xl">home</span>
+                </a>
+                <button class="p-3 rounded text-white/30 hover:text-white transition-colors" title="Настройки">
+                    <span class="material-symbols-outlined text-3xl">settings</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Dashboard Content -->
+        <main class="relative z-10 flex-1 flex flex-col overflow-hidden">
+            <!-- Top Bar Stats -->
+            <header class="h-20 flex items-center justify-between px-8 border-b border-white/10 bg-black/20 backdrop-blur-sm flex-shrink-0">
+                <div class="flex items-center gap-8">
+                    <div class="flex flex-col">
+                        <span class="text-xs uppercase tracking-widest text-primary font-bold">Некромант</span>
+                        <h1 class="text-xl font-bold leading-none font-display">УРОВЕНЬ 42</h1>
+                    </div>
+                    <!-- Health Bar -->
+                    <div class="hidden md:flex flex-col gap-1 w-48 lg:w-64">
+                        <div class="flex justify-between text-[10px] uppercase font-bold tracking-tighter">
+                            <span>Здоровье</span>
+                            <span>850 / 1000</span>
+                        </div>
+                        <div class="h-4 bg-black/60 rounded-sm border border-white/10 overflow-hidden p-0.5">
+                            <div class="h-full bg-gradient-to-r from-red-900 to-red-600 rounded-sm fluid-glow-red relative" style="width: 85%;">
+                                <div class="absolute inset-0 bg-white/10 overflow-hidden"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mana/Soul Bar -->
+                    <div class="hidden lg:flex flex-col gap-1 w-64">
+                        <div class="flex justify-between text-[10px] uppercase font-bold tracking-tighter text-blue-400">
+                            <span>Эссенция души</span>
+                            <span>300 / 500</span>
+                        </div>
+                        <div class="h-4 bg-black/60 rounded-sm border border-white/10 overflow-hidden p-0.5">
+                            <div class="h-full bg-gradient-to-r from-blue-900 to-blue-500 rounded-sm fluid-glow-blue" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="hidden sm:flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">payments</span>
+                        <span class="text-lg font-bold">12,450</span>
+                    </div>
+                    <div class="hidden sm:flex items-center gap-2">
+                        <span class="material-symbols-outlined text-blue-300">flare</span>
+                        <span class="text-lg font-bold">890</span>
+                    </div>
+                    <button class="flex items-center justify-center size-10 rounded bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Grid Layout for Doll & Inventory -->
+            <div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-0 overflow-hidden">
+                <!-- Center: Paper Doll Area -->
+                <section class="lg:col-span-5 relative flex items-center justify-center p-4 lg:p-8 paper-doll-bg lg:border-r border-white/5">
+                    <div class="relative w-full h-full max-w-md flex items-center justify-center">
+                        <!-- Character Silhouette Placeholder -->
+                        <div class="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+                            <span class="material-symbols-outlined text-[200px] lg:text-[360px] text-white/20">person</span>
+                        </div>
+                        
+                        <!-- Left Gear Column -->
+                        <div class="absolute left-2 lg:left-4 h-full flex flex-col justify-center gap-4 lg:gap-6">
+                            <div class="size-12 lg:size-16 rounded slot-border-gold bg-black/40 flex items-center justify-center group cursor-pointer hover:bg-black/60 transition-all" title="Шлем">
+                                <span class="material-symbols-outlined text-2xl lg:text-3xl text-white/20 group-hover:text-primary">head_mounted_device</span>
+                            </div>
+                            <div class="size-12 lg:size-16 rounded slot-border-gold bg-black/40 flex items-center justify-center group cursor-pointer hover:bg-black/60 transition-all" title="Щит">
+                                <span class="material-symbols-outlined text-2xl lg:text-3xl text-white/20 group-hover:text-primary">shield</span>
+                            </div>
+                            <div class="size-12 lg:size-16 rounded slot-border-silver bg-black/40 flex items-center justify-center group cursor-pointer hover:bg-black/60 transition-all" title="Перчатки">
+                                <span class="material-symbols-outlined text-2xl lg:text-3xl text-white/20 group-hover:text-primary">pan_tool</span>
+                            </div>
+                            <div class="size-12 lg:size-16 rounded slot-border-silver bg-black/40 flex items-center justify-center group cursor-pointer hover:bg-black/60 transition-all" title="Сапоги">
+                                <span class="material-symbols-outlined text-2xl lg:text-3xl text-white/20 group-hover:text-primary">footprint</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Gear Column -->
+                        <div class="absolute right-2 lg:right-4 h-full flex flex-col justify-center gap-4 lg:gap-6">
+                            <div class="size-12 lg:size-16 rounded slot-border-gold bg-black/40 flex items-center justify-center group cursor-pointer hover:bg-black/60 transition-all" title="Оружие - Посох Душ">
+                                <span class="material-symbols-outlined text-3xl lg:text-4xl text-primary item-glow-epic">auto_fix_high</span>
+                            </div>
+                            <div class="size-12 lg:size-16 rounded slot-border-silver bg-black/40 flex items-center justify-center group cursor-pointer hover:bg-black/60 transition-all" title="Амулет">
+                                <span class="material-symbols-outlined text-2xl lg:text-3xl text-white/20 group-hover:text-primary">shield_with_heart</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <div class="size-8 lg:size-10 rounded slot-border-silver bg-black/40 flex items-center justify-center" title="Кольцо 1">
+                                    <span class="material-symbols-outlined text-lg lg:text-xl text-white/10">auto_awesome</span>
+                                </div>
+                                <div class="size-8 lg:size-10 rounded slot-border-silver bg-black/40 flex items-center justify-center" title="Кольцо 2">
+                                    <span class="material-symbols-outlined text-lg lg:text-xl text-white/10">auto_awesome</span>
+                                </div>
+                            </div>
+                            <div class="size-12 lg:size-16 rounded slot-border-silver bg-black/40 flex items-center justify-center group cursor-pointer hover:bg-black/60 transition-all" title="Артефакт">
+                                <span class="material-symbols-outlined text-2xl lg:text-3xl text-white/20 group-hover:text-primary">diamond</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Center Gear (Chest) -->
+                        <div class="size-16 lg:size-20 rounded slot-border-gold bg-black/40 flex items-center justify-center shadow-lg" title="Нагрудник">
+                            <span class="material-symbols-outlined text-4xl lg:text-5xl text-white/20">body_fat</span>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Right: Inventory Grid Area -->
+                <section class="lg:col-span-7 flex flex-col p-4 lg:p-8 bg-black/10 overflow-hidden">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-bold uppercase tracking-widest text-white/80 font-display">Инвентарь</h2>
+                        <div class="flex gap-4 items-center">
+                            <span class="text-sm text-white/40">Занято: <span class="text-white">14 / 48</span></span>
+                            <div class="flex gap-1">
+                                <div class="size-4 rounded-full bg-rarity-common/20 border border-rarity-common/40" title="Обычные"></div>
+                                <div class="size-4 rounded-full bg-rarity-rare/20 border border-rarity-rare/40" title="Редкие"></div>
+                                <div class="size-4 rounded-full bg-rarity-epic/20 border border-rarity-epic/40" title="Эпические"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Inventory Grid -->
+                    <div class="grid grid-cols-6 sm:grid-cols-8 gap-2 lg:gap-3 overflow-y-auto pr-2 custom-scrollbar flex-1">
+                        <!-- Epic Item -->
+                        <div class="aspect-square rounded border border-primary/40 bg-primary/10 flex items-center justify-center cursor-pointer group hover:bg-primary/20 transition-all relative" title="Ледяной кристалл">
+                            <span class="material-symbols-outlined text-3xl lg:text-4xl text-primary item-glow-epic">ac_unit</span>
+                            <div class="absolute bottom-1 right-1 text-[10px] font-bold text-primary">E</div>
+                        </div>
+                        <!-- Rare Item -->
+                        <div class="aspect-square rounded border border-blue-500/40 bg-blue-500/10 flex items-center justify-center cursor-pointer group hover:bg-blue-500/20 transition-all relative" title="Свиток телепортации">
+                            <span class="material-symbols-outlined text-3xl lg:text-4xl text-blue-400 item-glow-rare">scrollable_header</span>
+                            <div class="absolute bottom-1 right-1 text-[10px] font-bold text-blue-400">R</div>
+                        </div>
+                        <!-- Common Item -->
+                        <div class="aspect-square rounded border border-white/10 bg-white/5 flex items-center justify-center cursor-pointer group hover:bg-white/10 transition-all relative" title="Костяной меч">
+                            <span class="material-symbols-outlined text-3xl lg:text-4xl text-white/40">swords</span>
+                            <div class="absolute bottom-1 right-1 text-[10px] font-bold text-white/40">C</div>
+                        </div>
+                        <!-- Epic Item with notification -->
+                        <div class="aspect-square rounded border-2 border-primary/40 bg-primary/10 flex items-center justify-center cursor-pointer group hover:bg-primary/20 transition-all relative ring-1 ring-primary/50" title="Камень душ - НОВЫЙ!">
+                            <span class="material-symbols-outlined text-3xl lg:text-4xl text-primary item-glow-epic">magic_button</span>
+                            <div class="absolute -top-1 -right-1 flex h-3 w-3">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                            </div>
+                        </div>
+                        <!-- Common Items -->
+                        <div class="aspect-square rounded border border-white/10 bg-white/5 flex items-center justify-center cursor-pointer group hover:bg-white/10 transition-all relative" title="Зелье здоровья">
+                            <span class="material-symbols-outlined text-3xl lg:text-4xl text-red-400/60">water_drop</span>
+                        </div>
+                        <div class="aspect-square rounded border border-white/10 bg-white/5 flex items-center justify-center cursor-pointer group hover:bg-white/10 transition-all relative" title="Зелье маны">
+                            <span class="material-symbols-outlined text-3xl lg:text-4xl text-blue-400/60">water_drop</span>
+                        </div>
+                        <!-- Rare Item -->
+                        <div class="aspect-square rounded border border-blue-500/40 bg-blue-500/10 flex items-center justify-center cursor-pointer group hover:bg-blue-500/20 transition-all relative" title="Руна силы">
+                            <span class="material-symbols-outlined text-3xl lg:text-4xl text-blue-400 item-glow-rare">energy_savings_leaf</span>
+                            <div class="absolute bottom-1 right-1 text-[10px] font-bold text-blue-400">R</div>
+                        </div>
+                        <!-- Common Item -->
+                        <div class="aspect-square rounded border border-white/10 bg-white/5 flex items-center justify-center cursor-pointer group hover:bg-white/10 transition-all relative" title="Кости">
+                            <span class="material-symbols-outlined text-3xl lg:text-4xl text-white/40">skeleton</span>
+                        </div>
+                        
+                        <!-- Empty slots -->
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                        <div class="aspect-square rounded border border-white/5 bg-black/20 flex items-center justify-center hover:bg-black/40 transition-all"></div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Bottom Tooltip / Lore Section -->
+            <footer class="h-auto lg:h-40 p-4 lg:p-6 border-t border-white/10 bg-black/60 backdrop-blur-md flex flex-col lg:flex-row gap-4 lg:gap-8 flex-shrink-0">
+                <div class="hidden lg:flex w-24 h-24 rounded border-2 border-primary bg-primary/10 items-center justify-center shadow-[0_0_20px_rgba(197,160,89,0.2)] flex-shrink-0">
+                    <span class="material-symbols-outlined text-6xl text-primary item-glow-epic">magic_button</span>
+                </div>
+                <div class="flex-1 flex flex-col min-w-0">
+                    <div class="flex items-center justify-between mb-1 flex-wrap gap-2">
+                        <h3 class="text-xl lg:text-2xl font-bold text-primary uppercase tracking-tight font-display">Камень Душ</h3>
+                        <span class="px-3 py-1 bg-primary text-black text-[10px] font-bold rounded-sm uppercase tracking-widest">Эпический артефакт</span>
+                    </div>
+                    <div class="flex gap-4 text-xs font-bold text-white/60 mb-3 flex-wrap">
+                        <span class="flex items-center gap-1"><span class="text-primary">+15</span> ИНТЕЛЛЕКТ</span>
+                        <span class="flex items-center gap-1"><span class="text-primary">+10%</span> РЕГЕН МАНЫ</span>
+                        <span class="flex items-center gap-1"><span class="text-primary">+5</span> НЕКРОМАНТИЯ</span>
+                    </div>
+                    <p class="text-white/40 italic text-sm font-light leading-relaxed max-w-3xl hidden lg:block">
+                        "Эссенция тысячи павших воинов пульсирует в этой кристаллической темнице. Она гудит низким, скорбным напевом бездны, шепча секреты жизни и смерти тем, кто достаточно храбр, чтобы слушать."
+                    </p>
+                </div>
+                <div class="flex lg:flex-col justify-center gap-2 flex-shrink-0">
+                    <button class="px-6 py-2 bg-primary text-background-dark font-bold rounded uppercase text-sm hover:brightness-110 transition-all font-display">Надеть</button>
+                    <button class="px-6 py-2 bg-white/5 border border-white/10 text-white font-bold rounded uppercase text-sm hover:bg-white/10 transition-all font-display">Разобрать</button>
+                </div>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

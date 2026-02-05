@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html class="dark" lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Мертвые не умирают — MMORPG</title>
     
     <!-- SEO Meta Tags -->
@@ -26,17 +26,22 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     
-    <!-- Preconnect для оптимизации загрузки шрифтов -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;700&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
     
-    <!-- SEO оптимизация -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link crossorigin="" rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- SEO -->
     <link rel="canonical" href="https://ligross.github.io/ai-homework1/">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Dead Don't Die Studios">
     
-    <!-- Schema.org разметка для VideoGame -->
+    <!-- Schema.org -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -48,103 +53,55 @@
       "playMode": "MultiPlayer"
     }
     </script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#8b0000",
+                        gold: "#c5a059",
+                        "background-light": "#f4f1ea",
+                        "background-dark": "#0a0908",
+                        "card-dark": "#161412",
+                    },
+                    fontFamily: {
+                        display: ["Cinzel", "serif"],
+                        serif: ["Playfair Display", "serif"],
+                        sans: ["Roboto", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+    
     <style>
-        :root {
-            --bg-color: #1a1612;
-            --paper-color: #d3c4a9;
-            --accent-blood: #8a0303;
-            --accent-magic: #4b0082;
-            --text-color: #d4c5a6; /* Улучшенная контрастность для WCAG AA */
-            --stone-border: #4a453f;
+        .glow-red {
+            text-shadow: 0 0 15px rgba(139, 0, 0, 0.8);
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'EB+Garamond', serif;
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Текстура старой бумаги поверх всего сайта */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
-            opacity: 0.05;
-            pointer-events: none;
-            z-index: 9999;
-        }
-
-        /* --- Общие элементы UI --- */
-        .gothic-title {
-            font-family: 'UnifrakturMaguntia', cursive;
-            color: #e0d0b0;
-            text-shadow: 2px 2px 4px #000;
-        }
-
-        .cinzel {
-            font-family: 'Cinzel', serif;
-        }
-
-        .btn-ui {
-            display: inline-flex;
-            align-items: center;
-            padding: 15px 35px;
-            min-height: 44px; /* Touch-friendly размер */
-            min-width: 44px;
-            background: #2a2520;
-            border: 3px solid var(--stone-border);
-            color: var(--paper-color);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: bold;
-            position: relative;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            overflow: hidden;
-        }
-
-        .btn-ui:hover {
-            border-color: var(--accent-blood);
-            color: #fff;
-            text-shadow: 0 0 10px var(--accent-blood);
-            box-shadow: 0 0 20px rgba(138, 3, 3, 0.4);
-        }
-
-        .btn-ui::before {
-            content: '⚔';
-            margin-right: 10px;
-            font-size: 1.2em;
-        }
-
-        /* --- Секция Hero (Параллакс) --- */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            background: linear-gradient(to bottom, rgba(26,22,18,0.3), var(--bg-color)), 
-                        url('https://images.unsplash.com/photo-1505832018823-50331d70d237?auto=format&fit=crop&w=1920&q=80'); /* Заглушка кладбища */
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(10, 9, 8, 0.3), rgba(10, 9, 8, 1)), 
+                        url('https://images.unsplash.com/photo-1505832018823-50331d70d237?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            padding: 20px;
         }
-
-        /* Микро-анимации: Туман и Пепел */
+        .card-border {
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            transition: all 0.3s ease;
+        }
+        .card-border:hover {
+            border-color: rgba(197, 160, 89, 0.6);
+            transform: translateY(-5px);
+        }
+        .roadmap-line {
+            background: linear-gradient(to bottom, transparent, #8b0000, #8b0000, transparent);
+        }
+        .bg-scroll {
+            background: url('https://www.transparenttextures.com/patterns/dark-leather.png');
+        }
+        /* Fog animation */
         .fog {
             position: absolute;
             bottom: 0; left: 0; width: 100%; height: 200px;
@@ -152,1146 +109,404 @@
             animation: fogMove 10s ease-in-out infinite alternate;
             pointer-events: none;
         }
-
         @keyframes fogMove {
             from { opacity: 0.3; transform: translateX(-5%); }
             to { opacity: 0.6; transform: translateX(5%); }
         }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            max-width: 700px;
-            margin-bottom: 30px;
-            color: var(--paper-color);
-        }
-
-        /* --- Секция Наследие (Свиток) --- */
-        .lore-section {
-            padding: 100px 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .scroll {
-            background: #c2b280;
-            color: #2b2622;
-            padding: 60px;
-            max-width: 800px;
-            position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            border-left: 20px solid #a6915d;
-            border-right: 20px solid #a6915d;
-            clip-path: polygon(0% 2%, 100% 0%, 100% 98%, 0% 100%);
-        }
-
-        .scroll h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 2.5rem;
-        }
-
-        /* --- Секция Механики --- */
-        .mechanics {
-            padding: 80px 20px;
-            background: #15120f;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: #1e1a16;
-            border: 2px solid var(--stone-border);
-            padding: 30px;
-            text-align: center;
-            transition: 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-blood);
-            box-shadow: 0 10px 30px rgba(138, 3, 3, 0.3);
-        }
-
-        /* Эффект свечения для карточек */
-        .card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent,
-                rgba(138, 3, 3, 0.1),
-                transparent
-            );
-            transform: rotate(45deg);
-            animation: cardShine 6s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes cardShine {
-            0%, 100% { transform: translateX(-100%) rotate(45deg); }
-            50% { transform: translateX(100%) rotate(45deg); }
-        }
-
-        .card i {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 15px;
-            filter: sepia(1) saturate(2);
-        }
-
-        /* --- Сообщество (Надгробия) --- */
-        .community {
-            padding: 100px 20px;
-            text-align: center;
-        }
-
-        .tombstone-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 50px;
-        }
-
-        .tombstone {
-            width: 280px;
-            height: 380px;
-            background: #3d3d3d;
-            border-radius: 140px 140px 0 0;
-            padding: 80px 30px 20px;
-            position: relative;
-            border: 4px solid #2a2a2a;
-            box-shadow: inset 0 10px 20px rgba(0,0,0,0.5);
-            transition: 0.3s;
-        }
-
-        .tombstone:hover {
-            background: #4a4a4a;
-            transform: scale(1.05);
-        }
-
-        .tombstone blockquote {
-            font-style: italic;
-            font-size: 0.95rem;
-        }
-
-        .tombstone .epitaph-name {
-            margin-top: 20px;
-            display: block;
-            font-weight: bold;
-            color: #888;
-        }
-
-        /* --- Футер --- */
-        footer {
-            padding: 60px 20px;
-            border-top: 1px solid var(--stone-border);
-            text-align: center;
-            background: #0d0b09;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .icon-box {
-            width: 50px;
-            height: 50px;
-            border: 2px solid var(--stone-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            text-decoration: none;
-            color: var(--text-color);
-        }
-
-        .icon-box:hover {
-            border-color: var(--accent-blood);
-            color: var(--accent-blood);
-        }
-
-        /* --- Адаптивность --- */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .scroll { padding: 30px; border-width: 10px; }
-            .tombstone { width: 100%; height: auto; border-radius: 20px; padding: 40px; }
-        }
-
-        /* Плавное появление при скролле */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: 1s all ease;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* CSS-анимация пульсации для Hero вместо JS */
-        @keyframes heroGlow {
-            0%, 100% {
-                background-color: rgba(26,22,18,0.3);
-            }
-            50% {
-                background-color: rgba(26,22,18,0.4);
-            }
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(26,22,18,0.3);
-            animation: heroGlow 2s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .hero > * {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Skip-to-content ссылка для доступности */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--accent-blood);
-            color: white;
-            padding: 8px;
-            text-decoration: none;
-            z-index: 100;
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* Навигационное меню */
-        .navbar {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            background: rgba(26,22,18,0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--stone-border);
-            z-index: 1000;
-            padding: 15px 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-        }
-
-        .nav-logo {
-            font-size: 1.8rem;
-            text-decoration: none;
-            color: var(--paper-color);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-link {
-            color: var(--text-color);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-            transition: 0.3s;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--accent-blood);
-            text-shadow: 0 0 10px var(--accent-blood);
-        }
-
-        .nav-cta {
-            padding: 10px 25px;
-            font-size: 0.85rem;
-        }
-
-        /* Модальное окно */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.8);
-        }
-
-        .modal-content {
-            background: var(--bg-color);
-            margin: 10% auto;
-            padding: 40px;
-            border: 3px solid var(--stone-border);
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-        }
-
-        .close {
-            position: absolute;
-            right: 20px; top: 10px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--text-color);
-        }
-
-        .close:hover {
-            color: var(--accent-blood);
-        }
-
-        #signup-form input {
-            width: 100%;
-            padding: 15px;
-            margin: 20px 0;
-            background: #2a2520;
-            border: 2px solid var(--stone-border);
-            color: var(--text-color);
-            font-family: 'Cinzel', serif;
-        }
-
-        .modal-note {
-            text-align: center;
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-top: 15px;
-        }
-
-        /* Гамбургер-меню */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            background: none;
-            border: none;
-            padding: 10px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--text-color);
-            transition: 0.3s;
-            display: block;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        /* Улучшенная доступность - focus-visible */
-        *:focus-visible {
-            outline: 3px solid var(--accent-blood);
-            outline-offset: 2px;
-        }
-
-        /* Стили для новых секций */
-        .gallery-section, .roadmap-section, .faq-section, .classes-section, .stats-section {
-            padding: 100px 20px;
-        }
-
-        .gallery-section {
-            background: #15120f;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 50px auto 0;
-        }
-
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border: 2px solid var(--stone-border);
-            aspect-ratio: 16/9;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-            border-color: var(--accent-blood);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Roadmap стили */
-        .timeline {
-            max-width: 900px;
-            margin: 50px auto;
-            position: relative;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--stone-border);
-        }
-
-        .timeline-item {
-            display: flex;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .timeline-item:nth-child(odd) {
-            flex-direction: row-reverse;
-        }
-
-        .timeline-content {
-            width: 45%;
-            background: #1e1a16;
-            padding: 30px;
-            border: 2px solid var(--stone-border);
-            position: relative;
-        }
-
-        .timeline-date {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-blood);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-        }
-
-        /* FAQ Аккордеон */
-        .faq-container {
-            max-width: 800px;
-            margin: 50px auto;
-        }
-
-        .faq-item {
-            background: #1e1a16;
-            border: 2px solid var(--stone-border);
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-
-        .faq-question {
-            width: 100%;
-            padding: 20px;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            text-align: left;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.3s;
-        }
-
-        .faq-question:hover {
-            color: var(--accent-blood);
-        }
-
-        .faq-question::after {
-            content: '+';
-            font-size: 1.5rem;
-            transition: 0.3s;
-        }
-
-        .faq-question.active::after {
-            content: '−';
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            padding: 0 20px;
-        }
-
-        .faq-answer.active {
-            max-height: 500px;
-            padding: 0 20px 20px;
-        }
-
-        /* Классы/Фракции */
-        .classes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 50px auto;
-        }
-
-        .class-card {
-            background: #1e1a16;
-            border: 2px solid var(--stone-border);
-            padding: 30px;
-            text-align: center;
-            transition: 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .class-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-magic);
-            box-shadow: 0 10px 30px rgba(75, 0, 130, 0.3);
-        }
-
-        .class-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        /* Статистика */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 50px auto;
-        }
-
-        .stat-box {
-            background: #1e1a16;
-            border: 2px solid var(--stone-border);
-            padding: 30px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            color: var(--accent-blood);
-            font-weight: bold;
-            font-family: 'Cinzel', serif;
-        }
-
-        .stat-label {
-            margin-top: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.9rem;
-        }
-
-        /* Социальные кнопки "Поделиться" */
-        .share-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .share-btn {
-            width: 44px;
-            height: 44px;
-            border: 2px solid var(--stone-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: var(--text-color);
-            transition: 0.3s;
-            font-size: 1.2rem;
-        }
-
-        .share-btn:hover {
-            border-color: var(--accent-blood);
-            color: var(--accent-blood);
-            transform: scale(1.1);
-        }
-
-        /* Адаптивное меню для мобильных */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-menu {
-                position: fixed;
-                left: -100%;
-                top: 60px;
-                flex-direction: column;
-                background: rgba(26,22,18,0.98);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                padding: 20px 0;
-                border-top: 2px solid var(--stone-border);
-            }
-
-            .nav-menu.active {
-                left: 0;
-            }
-
-            .nav-cta {
-                display: none;
-            }
-            
-            .hero {
-                padding-top: 80px;
-                height: 100dvh; /* iOS fix */
-            }
-
-            .timeline::before {
-                left: 20px;
-            }
-
-            .timeline-item {
-                flex-direction: column !important;
-            }
-
-            .timeline-content {
-                width: 100%;
-                margin-left: 40px;
-            }
-
-            .timeline-date {
-                left: 20px;
-                transform: translateX(0);
-            }
-        }
-
-        /* Отступ для секций из-за фиксированного меню */
-        section {
+        /* Scroll margin for fixed nav */
+        section[id] {
             scroll-margin-top: 80px;
         }
     </style>
 </head>
-<body>
+<body class="bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-200 font-sans selection:bg-primary selection:text-white">
 
-    <!-- Skip-to-content ссылка для доступности -->
-    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+    <!-- Skip-to-content for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-primary text-white p-2 z-[100]">
+        Перейти к основному содержанию
+    </a>
 
-    <!-- Навигационное меню -->
-    <nav class="navbar" role="navigation" aria-label="Главная навигация">
-        <div class="nav-container">
-            <a href="#hero" class="nav-logo gothic-title" aria-label="Мертвые не умирают - Главная">МНУ</a>
-            <button class="hamburger" aria-label="Открыть меню" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gold/20">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero" class="font-display text-2xl font-bold tracking-widest text-gold">МНУ</a>
+            
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-200" aria-label="Открыть меню">
+                <span class="material-icons-outlined">menu</span>
             </button>
-            <ul class="nav-menu" role="menubar">
-                <li role="none"><a href="#hero" class="nav-link cinzel" role="menuitem">Главная</a></li>
-                <li role="none"><a href="#lore" class="nav-link cinzel" role="menuitem">Лор</a></li>
-                <li role="none"><a href="#mechanics" class="nav-link cinzel" role="menuitem">Механики</a></li>
-                <li role="none"><a href="#community" class="nav-link cinzel" role="menuitem">Сообщество</a></li>
-            </ul>
-            <button class="nav-cta btn-ui cinzel" aria-label="Начать играть">Играть</button>
+            
+            <div id="nav-menu" class="hidden md:flex space-x-8 font-display text-sm tracking-widest uppercase">
+                <a class="hover:text-gold transition-colors" href="#hero">Главная</a>
+                <a class="hover:text-gold transition-colors" href="#lore">Лор</a>
+                <a class="hover:text-gold transition-colors" href="#mechanics">Механики</a>
+                <a class="hover:text-gold transition-colors" href="#community">Сообщество</a>
+                <a class="hover:text-gold transition-colors" href="profile.html">Кабинет</a>
+            </div>
+            
+            <div class="hidden md:flex gap-3">
+                <a href="register.html" class="bg-primary hover:bg-red-800 text-white px-6 py-2 font-display text-sm tracking-widest transition-all rounded">
+                    ИГРАТЬ
+                </a>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-nav" class="hidden md:hidden bg-background-dark/95 border-t border-gold/20 px-6 py-4">
+            <div class="flex flex-col space-y-4 font-display text-sm tracking-widest uppercase">
+                <a class="hover:text-gold transition-colors py-2" href="#hero">Главная</a>
+                <a class="hover:text-gold transition-colors py-2" href="#lore">Лор</a>
+                <a class="hover:text-gold transition-colors py-2" href="#mechanics">Механики</a>
+                <a class="hover:text-gold transition-colors py-2" href="#community">Сообщество</a>
+                <a class="hover:text-gold transition-colors py-2" href="profile.html">Кабинет</a>
+                <a href="register.html" class="bg-primary hover:bg-red-800 text-white px-6 py-2 font-display text-sm tracking-widest transition-all rounded text-center">
+                    ИГРАТЬ
+                </a>
+            </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero">
+    <header id="hero" class="relative min-h-screen flex items-center justify-center hero-gradient pt-20">
         <div class="fog"></div>
-        <h1 class="gothic-title">Мертвые не умирают.</h1>
-        <h1 class="gothic-title" style="font-size: 3rem; margin-top: -20px;">Они строят новый мир</h1>
-        <p class="cinzel">Изометрическая MMORPG-песочница в мире разумной нежити и голодных монстров</p>
-        <a href="#" class="btn-ui cinzel">Начать выживание</a>
-    </section>
+        <div class="text-center max-w-4xl px-6 relative z-10">
+            <h1 class="font-display text-5xl md:text-7xl font-black mb-6 tracking-tighter text-white">
+                МЕРТВЫЕ НЕ УМИРАЮТ.<br/>
+                <span class="text-gold">ОНИ СТРОЯТ НОВЫЙ МИР</span>
+            </h1>
+            <p class="font-serif italic text-xl md:text-2xl mb-12 text-gray-300">
+                Изометрическая MMORPG-песочница в мире разумной нежити и голодных монстров
+            </p>
+            <a href="register.html" class="border-2 border-gold text-gold hover:bg-gold hover:text-black px-10 py-4 font-display text-lg tracking-[0.2em] transition-all inline-flex items-center justify-center gap-3 group mx-auto">
+                <span class="material-symbols-outlined">skull</span>
+                <span>НАЧАТЬ ВЫЖИВАНИЕ</span>
+            </a>
+        </div>
+    </header>
 
     <!-- Lore Section -->
-    <section class="lore-section reveal" id="lore">
-        <div class="scroll" id="main-content">
-            <h2 class="cinzel">Наследие Первого Праха</h2>
-            <p>Когда последний бог покинул этот мир, земля не опустела. Мы, лишенные дыхания, но наделенные волей, восстали из руин. В этом мире смерть — лишь начало долгого пути строительства. </p>
-            <br>
-            <p>Фракция <strong>Шепчущих Костей</strong> стремится восстановить древние библиотеки, в то время как <strong>Кровавый Легион</strong> жаждет подчинить себе дикие болота. На чьей стороне будешь ты?</p>
+    <section id="lore" class="py-24 bg-stone-100 dark:bg-[#0c0b0a] relative overflow-hidden">
+        <div id="main-content" class="max-w-4xl mx-auto px-6 relative z-10">
+            <div class="bg-scroll p-12 border-4 border-double border-gold/30 bg-stone-200 dark:bg-[#1a1816] shadow-2xl">
+                <h2 class="font-display text-3xl text-center mb-8 text-gold uppercase tracking-widest">Наследие Первого Праха</h2>
+                <div class="space-y-6 font-serif text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                    <p>Когда последний бог покинул этот мир, земля не опустела. Мы, лишенные дыхания, но наделенные волей, восстали из руин. В этом мире смерть — лишь начало долгого пути строительства.</p>
+                    <p>Фракция <span class="text-primary font-bold">Шепчущих Костей</span> стремится восстановить древние библиотеки, в то время как <span class="text-primary font-bold">Кровавый Легион</span> жаждет подчинить себе дикие болота. На чьей стороне будешь ты?</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Mechanics Section -->
-    <section class="mechanics reveal" id="mechanics">
-        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 50px;">Механики Мира</h2>
-        <div class="grid">
-            <div class="card">
-                <i role="img" aria-label="Замок">🏰</i>
-                <h3 class="cinzel">Создай свой некрополь</h3>
-                <p>Возводи стены из проклятого камня, которые простоят вечность.</p>
-            </div>
-            <div class="card">
-                <i role="img" aria-label="Меч">🗡️</i>
-                <h3 class="cinzel">Оружие из праха</h3>
-                <p>Ковка артефактов, используя души павших врагов в качестве закалки.</p>
-            </div>
-            <div class="card">
-                <i role="img" aria-label="Весы">⚖️</i>
-                <h3 class="cinzel">Торговля Костями</h3>
-                <p>Уникальная экономика, где валюта — это время и останки.</p>
-            </div>
-            <div class="card">
-                <i role="img" aria-label="Череп">💀</i>
-                <h3 class="cinzel">PvP Осады</h3>
-                <p>Захватывай чужие зиккураты в масштабных изометрических битвах.</p>
+    <section id="mechanics" class="py-24 bg-background-light dark:bg-background-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="font-display text-4xl text-center mb-16 text-gold tracking-widest">Механики Мира</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-stone-200 dark:bg-card-dark p-8 text-center card-border">
+                    <span class="material-icons-outlined text-5xl text-gold mb-6">castle</span>
+                    <h3 class="font-display text-xl mb-4">Создай свой некрополь</h3>
+                    <p class="text-sm opacity-80 leading-relaxed">Возведи стены из проклятого камня, которые простоят вечность.</p>
+                </div>
+                <div class="bg-stone-200 dark:bg-card-dark p-8 text-center card-border">
+                    <span class="material-icons-outlined text-5xl text-gold mb-6">colorize</span>
+                    <h3 class="font-display text-xl mb-4">Оружие из праха</h3>
+                    <p class="text-sm opacity-80 leading-relaxed">Ковка артефактов, используя души павших врагов в качестве закалки.</p>
+                </div>
+                <div class="bg-stone-200 dark:bg-card-dark p-8 text-center card-border">
+                    <span class="material-icons-outlined text-5xl text-gold mb-6">balance</span>
+                    <h3 class="font-display text-xl mb-4">Торговля Костями</h3>
+                    <p class="text-sm opacity-80 leading-relaxed">Уникальная экономика, где валюта — это время и останки.</p>
+                </div>
+                <div class="bg-stone-200 dark:bg-card-dark p-8 text-center card-border">
+                    <span class="material-icons-outlined text-5xl text-gold mb-6">skull</span>
+                    <h3 class="font-display text-xl mb-4">PvP Осады</h3>
+                    <p class="text-sm opacity-80 leading-relaxed">Захватывай чужие зиккураты в масштабных изометрических битвах.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Statistics Section -->
-    <section class="stats-section reveal" id="stats">
-        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 20px;">Мир Живёт</h2>
-        <p class="cinzel" style="text-align: center; opacity: 0.7;">Статистика нашего мира нежити</p>
-        <div class="stats-grid">
-            <div class="stat-box reveal">
-                <div class="stat-number" data-count="15420">0</div>
-                <div class="stat-label">Восставших душ</div>
-            </div>
-            <div class="stat-box reveal">
-                <div class="stat-number" data-count="3428">0</div>
-                <div class="stat-label">Некрополей</div>
-            </div>
-            <div class="stat-box reveal">
-                <div class="stat-number" data-count="12847">0</div>
-                <div class="stat-label">Осад замков</div>
-            </div>
-            <div class="stat-box reveal">
-                <div class="stat-number" data-count="892134">0</div>
-                <div class="stat-label">Косточек добыто</div>
+    <section id="stats" class="py-24 bg-stone-200 dark:bg-[#0f0e0d]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="font-display text-3xl text-center mb-16 text-gold tracking-widest">Мир Живёт</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-12">
+                <div class="text-center group">
+                    <div class="font-display text-4xl md:text-5xl text-primary glow-red mb-2 transition-transform group-hover:scale-110" data-count="15420">15,420</div>
+                    <div class="text-xs uppercase tracking-[0.3em] opacity-60">восставших душ</div>
+                </div>
+                <div class="text-center group">
+                    <div class="font-display text-4xl md:text-5xl text-primary glow-red mb-2 transition-transform group-hover:scale-110" data-count="3428">3,428</div>
+                    <div class="text-xs uppercase tracking-[0.3em] opacity-60">некрополей</div>
+                </div>
+                <div class="text-center group">
+                    <div class="font-display text-4xl md:text-5xl text-primary glow-red mb-2 transition-transform group-hover:scale-110" data-count="12847">12,847</div>
+                    <div class="text-xs uppercase tracking-[0.3em] opacity-60">осад замков</div>
+                </div>
+                <div class="text-center group">
+                    <div class="font-display text-4xl md:text-5xl text-primary glow-red mb-2 transition-transform group-hover:scale-110" data-count="892134">892,134</div>
+                    <div class="text-xs uppercase tracking-[0.3em] opacity-60">косточек добыто</div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Gallery Section -->
-    <section class="gallery-section reveal" id="gallery">
-        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 20px;">Мир в Скриншотах</h2>
-        <p class="cinzel" style="text-align: center; opacity: 0.7;">Загляни в царство вечной ночи</p>
-        <div class="gallery-grid">
-            <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?w=600&h=400&fit=crop" alt="Некрополь при свете луны" loading="lazy">
-            </div>
-            <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=600&h=400&fit=crop" alt="Битва с боссом" loading="lazy">
-            </div>
-            <div class="gallery-item reveal">
-                <img src="https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?w=600&h=400&fit=crop" alt="Подземелье" loading="lazy">
+    <section id="gallery" class="py-24 bg-background-light dark:bg-background-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="font-display text-4xl text-center mb-4 text-gold tracking-widest">Мир в Скриншотах</h2>
+            <p class="text-center text-gray-500 mb-16 italic">Загляни в царство вечной ночи</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="overflow-hidden border border-gold/20 hover:border-gold/60 transition-all group">
+                    <img src="https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?w=600&h=400&fit=crop" 
+                         alt="Некрополь при свете луны" 
+                         loading="lazy"
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="overflow-hidden border border-gold/20 hover:border-gold/60 transition-all group">
+                    <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=600&h=400&fit=crop" 
+                         alt="Битва с боссом" 
+                         loading="lazy"
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="overflow-hidden border border-gold/20 hover:border-gold/60 transition-all group">
+                    <img src="https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?w=600&h=400&fit=crop" 
+                         alt="Подземелье" 
+                         loading="lazy"
+                         class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Classes/Factions Section -->
-    <section class="classes-section reveal" id="classes">
-        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 20px;">Фракции</h2>
-        <p class="cinzel" style="text-align: center; opacity: 0.7;">Выбери свою сторону в войне</p>
-        <div class="classes-grid">
-            <div class="class-card reveal">
-                <span class="class-icon">💀</span>
-                <h3 class="cinzel">Шёпот Костей</h3>
-                <p style="margin-top: 15px;">Хранители древних знаний. Восстанавливают библиотеки и исследуют забытые тайны.</p>
-                <ul style="margin-top: 15px; text-align: left; padding-left: 20px;">
-                    <li>Магия некромантии</li>
-                    <li>Интеллект +5</li>
-                    <li>Защита союзников</li>
-                </ul>
-            </div>
-            <div class="class-card reveal">
-                <span class="class-icon">🩸</span>
-                <h3 class="cinzel">Кровавый Легион</h3>
-                <p style="margin-top: 15px;">Завоеватели болот. Жаждут власти и подчиняют дикие земли.</p>
-                <ul style="margin-top: 15px; text-align: left; padding-left: 20px;">
-                    <li>Боевая ярость</li>
-                    <li>Сила +5</li>
-                    <li>Атака без предупреждения</li>
-                </ul>
-            </div>
-            <div class="class-card reveal">
-                <span class="class-icon">🕷️</span>
-                <h3 class="cinzel">Теневое Братство</h3>
-                <p style="margin-top: 15px;">Мастера скрытности. Добывают ресурсы из тени.</p>
-                <ul style="margin-top: 15px; text-align: left; padding-left: 20px;">
-                    <li>Скорость +3</li>
-                    <li>Кража ресурсов</li>
-                    <li>Невидимость</li>
-                </ul>
+    <!-- Factions Section -->
+    <section id="classes" class="py-24 bg-stone-100 dark:bg-[#0c0b0a]">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="font-display text-4xl text-center mb-4 text-gold tracking-widest">Фракции</h2>
+            <p class="text-center text-gray-500 mb-16 italic">Выбери свою сторону в вечной войне</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="group relative overflow-hidden bg-stone-200 dark:bg-card-dark border-b-4 border-gold/40 p-10 hover:border-gold transition-all">
+                    <div class="mb-8 flex justify-center">
+                        <span class="material-icons-outlined text-7xl text-gray-400 group-hover:text-gold transition-colors">skull</span>
+                    </div>
+                    <h3 class="font-display text-2xl text-center mb-6">Шепот Костей</h3>
+                    <p class="text-sm mb-8 opacity-70 leading-relaxed text-center">Хранители древних знаний. Восстанавливают библиотеки и исследуют забытые тайны.</p>
+                    <ul class="space-y-3 text-xs uppercase tracking-widest border-t border-gold/10 pt-6">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold rounded-full mr-3"></span> Магия некромантии</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold rounded-full mr-3"></span> Интеллект +5</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-gold rounded-full mr-3"></span> Защита союзников</li>
+                    </ul>
+                </div>
+                <div class="group relative overflow-hidden bg-stone-200 dark:bg-card-dark border-b-4 border-primary/40 p-10 hover:border-primary transition-all">
+                    <div class="mb-8 flex justify-center">
+                        <span class="material-icons-outlined text-7xl text-primary/60 group-hover:text-primary transition-colors">water_drop</span>
+                    </div>
+                    <h3 class="font-display text-2xl text-center mb-6">Кровавый Легион</h3>
+                    <p class="text-sm mb-8 opacity-70 leading-relaxed text-center">Завоеватели болот. Жаждут власти и подчиняют дикие земли своей воле.</p>
+                    <ul class="space-y-3 text-xs uppercase tracking-widest border-t border-primary/10 pt-6">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-primary rounded-full mr-3"></span> Боевая ярость</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-primary rounded-full mr-3"></span> Сила +5</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-primary rounded-full mr-3"></span> Атака без предупреждения</li>
+                    </ul>
+                </div>
+                <div class="group relative overflow-hidden bg-stone-200 dark:bg-card-dark border-b-4 border-purple-500/40 p-10 hover:border-purple-500 transition-all">
+                    <div class="mb-8 flex justify-center">
+                        <span class="material-icons-outlined text-7xl text-purple-800/60 group-hover:text-purple-500 transition-colors">bug_report</span>
+                    </div>
+                    <h3 class="font-display text-2xl text-center mb-6">Теневое Братство</h3>
+                    <p class="text-sm mb-8 opacity-70 leading-relaxed text-center">Мастера скрытности. Добывают ресурсы из тени, оставаясь незамеченными.</p>
+                    <ul class="space-y-3 text-xs uppercase tracking-widest border-t border-purple-500/10 pt-6">
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full mr-3"></span> Скорость +3</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full mr-3"></span> Кража ресурсов</li>
+                        <li class="flex items-center"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full mr-3"></span> Невидимость</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Roadmap Section -->
-    <section class="roadmap-section reveal" id="roadmap">
-        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 20px;">Дорожная Карта</h2>
-        <p class="cinzel" style="text-align: center; opacity: 0.7;">Путь к бессмертию</p>
-        <div class="timeline">
-            <div class="timeline-item reveal">
-                <div class="timeline-content">
-                    <h3 class="cinzel">Альфа-Тест</h3>
-                    <p>Базовая механика строительства некрополей.PvP арена.Система крафта оружия из праха.</p>
+    <section id="roadmap" class="py-24 bg-stone-200 dark:bg-[#0c0b0a]">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="font-display text-4xl text-center mb-2 text-gold tracking-widest">Дорожная Карта</h2>
+            <p class="text-center text-gray-500 mb-20 italic">Путь к бессмертию</p>
+            <div class="relative">
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 roadmap-line hidden md:block"></div>
+                <div class="space-y-24">
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 text-center md:text-right">
+                            <span class="bg-primary text-white text-[10px] font-bold px-3 py-1 mb-4 inline-block tracking-widest">Q1 2025</span>
+                            <h4 class="font-display text-xl mb-2 text-gold">Альфа-Тест</h4>
+                            <p class="text-sm opacity-70">Базовая механика строительства некрополей. PvP арена. Система крафта оружия из праха.</p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full shadow-[0_0_15px_#8b0000] hidden md:block"></div>
+                        <div class="md:w-1/2"></div>
+                    </div>
+                    <div class="relative flex flex-col md:flex-row-reverse items-center">
+                        <div class="md:w-1/2 md:pl-12 text-center md:text-left">
+                            <span class="bg-primary text-white text-[10px] font-bold px-3 py-1 mb-4 inline-block tracking-widest">Q2 2025</span>
+                            <h4 class="font-display text-xl mb-2 text-gold">Бета-Тест</h4>
+                            <p class="text-sm opacity-70">Две основные фракции. Экономика торговли костями. Система осад замков. Первые подземелья.</p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full shadow-[0_0_15px_#8b0000] hidden md:block"></div>
+                        <div class="md:w-1/2"></div>
+                    </div>
+                    <div class="relative flex flex-col md:flex-row items-center">
+                        <div class="md:w-1/2 md:pr-12 text-center md:text-right">
+                            <span class="bg-primary text-white text-[10px] font-bold px-3 py-1 mb-4 inline-block tracking-widest">Q4 2025</span>
+                            <h4 class="font-display text-xl mb-2 text-gold">Ранний Доступ</h4>
+                            <p class="text-sm opacity-70">Открытый мир. Клановая система. Рейдовые боссы. Турнирная таблица.</p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full shadow-[0_0_15px_#8b0000] hidden md:block"></div>
+                        <div class="md:w-1/2"></div>
+                    </div>
+                    <div class="relative flex flex-col md:flex-row-reverse items-center">
+                        <div class="md:w-1/2 md:pl-12 text-center md:text-left">
+                            <span class="bg-primary text-white text-[10px] font-bold px-3 py-1 mb-4 inline-block tracking-widest">2026</span>
+                            <h4 class="font-display text-xl mb-2 text-gold">Полный Релиз</h4>
+                            <p class="text-sm opacity-70">Все локации. Серверные осады. Система гильдий. Баланс и оптимизация.</p>
+                        </div>
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full shadow-[0_0_15px_#8b0000] hidden md:block"></div>
+                        <div class="md:w-1/2"></div>
+                    </div>
                 </div>
-                <div class="timeline-date">Q1 2025</div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-content">
-                    <h3 class="cinzel">Бета-Тест</h3>
-                    <p>Две основные фракции.Экономика торговли костями.Система осад замков.Первые подземелья.</p>
-                </div>
-                <div class="timeline-date">Q2 2025</div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-content">
-                    <h3 class="cinzel">Ранний Доступ</h3>
-                    <p>Открытый мир.Клановая система.Рейдовые боссы.Турнирная таблица.</p>
-                </div>
-                <div class="timeline-date">Q4 2025</div>
-            </div>
-            <div class="timeline-item reveal">
-                <div class="timeline-content">
-                    <h3 class="cinzel">Полный Релиз</h3>
-                    <p>Все локации.Серверные осады.Система гильдий.Баланс и оптимизация.</p>
-                </div>
-                <div class="timeline-date">2026</div>
             </div>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq-section reveal" id="faq">
-        <h2 class="gothic-title" style="text-align: center; font-size: 3rem; margin-bottom: 20px;">Тайны и Вопросы</h2>
-        <p class="cinzel" style="text-align: center; opacity: 0.7;">Ответы на частые вопросы</p>
-        <div class="faq-container">
-            <div class="faq-item reveal">
-                <button class="faq-question" aria-expanded="false" aria-controls="faq1">
-                    Бесплатная ли игра?
-                </button>
-                <div class="faq-answer" id="faq1">
-                    <p>Да, "Мертвые не умирают" полностью бесплатная MMORPG. Мы зарабатываем на косметических предметах и VIP-статусе, которые не дают преимущества в PvP.</p>
-                </div>
+    <section id="faq" class="py-24 bg-background-light dark:bg-background-dark">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="font-display text-3xl text-center mb-16 text-gold tracking-widest uppercase">Тайны и Вопросы</h2>
+            <div class="space-y-4">
+                <details class="group bg-stone-200 dark:bg-card-dark rounded-none border border-gold/10">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none hover:bg-gold/5 transition-colors">
+                        <span class="font-display tracking-wider">Бесплатная ли игра?</span>
+                        <span class="material-icons-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm opacity-70 leading-relaxed">
+                        Да, "Мертвые не умирают" полностью бесплатная MMORPG. Мы зарабатываем на косметических предметах и VIP-статусе, которые не дают преимущества в PvP.
+                    </div>
+                </details>
+                <details class="group bg-stone-200 dark:bg-card-dark rounded-none border border-gold/10">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none hover:bg-gold/5 transition-colors">
+                        <span class="font-display tracking-wider">Какие платформы поддерживаются?</span>
+                        <span class="material-icons-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm opacity-70 leading-relaxed">
+                        Игра доступна на PC (Windows, macOS, Linux). Консольные версии планируются после релиза.
+                    </div>
+                </details>
+                <details class="group bg-stone-200 dark:bg-card-dark rounded-none border border-gold/10">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none hover:bg-gold/5 transition-colors">
+                        <span class="font-display tracking-wider">Будет ли PvE контент?</span>
+                        <span class="material-icons-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm opacity-70 leading-relaxed">
+                        Конечно! Помимо PvP осад, вас ждут рейдовые боссы, подземелья с редкими лутом, квесты и мировые события.
+                    </div>
+                </details>
+                <details class="group bg-stone-200 dark:bg-card-dark rounded-none border border-gold/10">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none hover:bg-gold/5 transition-colors">
+                        <span class="font-display tracking-wider">Как присоединиться к бета-тесту?</span>
+                        <span class="material-icons-outlined group-open:rotate-180 transition-transform">expand_more</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-sm opacity-70 leading-relaxed">
+                        Оставьте email в форме регистрации. Мы регулярно рассылаем приглашения по мере приближения к этапу тестирования.
+                    </div>
+                </details>
             </div>
-            <div class="faq-item reveal">
-                <button class="faq-question" aria-expanded="false" aria-controls="faq2">
-                    Какие платформы поддерживаются?
-                </button>
-                <div class="faq-answer" id="faq2">
-                    <p>Игра доступна на PC (Windows, macOS, Linux). Консольные версии планируются после релиза.</p>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="py-24 bg-stone-300 dark:bg-[#11100f] border-t border-gold/10">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="font-display text-4xl mb-12 text-gold">ПРИСОЕДИНЯЙСЯ К СОВЕТУ</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-10 border border-gold/20 bg-stone-200 dark:bg-card-dark group hover:border-gold transition-all rounded-t-[50%] pt-16">
+                    <span class="material-icons-outlined text-4xl mb-4">forum</span>
+                    <h3 class="font-display text-xl mb-4 text-gold">DISCORD</h3>
+                    <p class="text-sm opacity-60 italic mb-8">"Я пришел сюда за золотом, а остался вечным стражем ворот. Лучшая RPG за последние века."</p>
+                    <a href="https://discord.gg/your-server-invite" target="_blank" rel="noopener noreferrer" class="inline-block bg-primary text-white px-8 py-3 w-full font-display text-xs tracking-[0.2em] hover:bg-red-800 transition-colors">ВОЙТИ</a>
                 </div>
-            </div>
-            <div class="faq-item reveal">
-                <button class="faq-question" aria-expanded="false" aria-controls="faq3">
-                    Будет ли PvE контент?
-                </button>
-                <div class="faq-answer" id="faq3">
-                    <p>Конечно! Помимо PvP осад, вас ждут рейдовые боссы, подземелья с редкими лутом, квесты и мировые события.</p>
+                <div class="p-10 border border-gold/20 bg-stone-200 dark:bg-card-dark group hover:border-gold transition-all rounded-t-[50%] pt-16">
+                    <span class="material-icons-outlined text-4xl mb-4">group</span>
+                    <h3 class="font-display text-xl mb-4 text-gold">VKONTAKTE</h3>
+                    <p class="text-sm opacity-60 italic mb-8">"Лучшее комьюнити для обсуждения тактик и поиска напарников."</p>
+                    <a href="https://vk.com/your-group" target="_blank" rel="noopener noreferrer" class="inline-block border border-gold text-gold px-8 py-3 w-full font-display text-xs tracking-[0.2em] hover:bg-gold hover:text-black transition-all">ВСТУПИТЬ</a>
                 </div>
-            </div>
-            <div class="faq-item reveal">
-                <button class="faq-question" aria-expanded="false" aria-controls="faq4">
-                    Как присоединиться к бета-тесту?
-                </button>
-                <div class="faq-answer" id="faq4">
-                    <p>Оставьте email в форме регистрации. Мы регулярно рассылаем приглашения по мере приближения к этапу тестирования.</p>
+                <div class="p-10 border border-gold/20 bg-stone-200 dark:bg-card-dark group hover:border-gold transition-all rounded-t-[50%] pt-16">
+                    <span class="material-icons-outlined text-4xl mb-4">send</span>
+                    <h3 class="font-display text-xl mb-4 text-gold">TELEGRAM</h3>
+                    <p class="text-sm opacity-60 italic mb-8">"Анимация магии здесь пахнет серой и величием. Построил свой замок за неделю."</p>
+                    <a href="https://t.me/your-channel" target="_blank" rel="noopener noreferrer" class="inline-block border border-gold text-gold px-8 py-3 w-full font-display text-xs tracking-[0.2em] hover:bg-gold hover:text-black transition-all">ПОДПИСАТЬСЯ</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Share Buttons -->
-    <section style="padding: 60px 20px; text-align: center;">
-        <h3 class="cinzel" style="margin-bottom: 20px;">Поделиться с друзьями</h3>
-        <div class="share-buttons">
-            <a href="https://vk.com/share.php?url=https://ligross.github.io/ai-homework1/" class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в ВКонтакте">VK</a>
-            <a href="https://t.me/share/url?url=https://ligross.github.io/ai-homework1/&text=Мертвые не умирают - MMORPG" class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в Telegram">TG</a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://ligross.github.io/ai-homework1/" class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в Facebook">FB</a>
-            <a href="https://twitter.com/intent/tweet?url=https://ligross.github.io/ai-homework1/&text=Мертвые не умирают - MMORPG" class="share-btn" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в Twitter">X</a>
-        </div>
-    </section>
-
-    <!-- Community Section -->
-    <section class="community reveal" id="community">
-        <h2 class="gothic-title" style="font-size: 3rem;">Голоса из Бездны</h2>
-        <div class="tombstone-grid">
-            <div class="tombstone">
-                <blockquote>"Я пришел сюда за золотом, а остался вечным стражем ворот. Лучшая RPG за последние века."</blockquote>
-                <span class="epitaph-name">— Skel_Rider_99</span>
-            </div>
-            <div class="tombstone" style="background: #2e2e2e;">
-                <h3 class="cinzel" style="margin-bottom: 15px;">Discord</h3>
-                <p>Присоединяйся к совету мертвых</p>
-                <br>
-                <a href="https://discord.gg/your-server-invite" class="btn-ui cinzel" style="padding: 10px 20px;" target="_blank" rel="noopener noreferrer">Войти</a>
-            </div>
-            <div class="tombstone">
-                <blockquote>"Анимация магии здесь пахнет серой и величием. Построил свой замок за неделю."</blockquote>
-                <span class="epitaph-name">— NecroMaster</span>
-            </div>
+    <section class="py-16 bg-background-light dark:bg-background-dark text-center">
+        <h3 class="font-display text-xl mb-8 text-gold tracking-widest">Поделиться с друзьями</h3>
+        <div class="flex justify-center gap-4">
+            <a href="https://vk.com/share.php?url=https://ligross.github.io/ai-homework1/" class="w-12 h-12 border border-gold/30 flex items-center justify-center hover:border-gold hover:text-gold transition-colors text-sm font-bold" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в ВКонтакте">VK</a>
+            <a href="https://t.me/share/url?url=https://ligross.github.io/ai-homework1/&text=Мертвые не умирают - MMORPG" class="w-12 h-12 border border-gold/30 flex items-center justify-center hover:border-gold hover:text-gold transition-colors text-sm font-bold" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в Telegram">TG</a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://ligross.github.io/ai-homework1/" class="w-12 h-12 border border-gold/30 flex items-center justify-center hover:border-gold hover:text-gold transition-colors text-sm font-bold" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в Facebook">FB</a>
+            <a href="https://twitter.com/intent/tweet?url=https://ligross.github.io/ai-homework1/&text=Мертвые не умирают - MMORPG" class="w-12 h-12 border border-gold/30 flex items-center justify-center hover:border-gold hover:text-gold transition-colors text-sm font-bold" target="_blank" rel="noopener noreferrer" aria-label="Поделиться в Twitter">X</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="social-icons">
-            <a href="https://vk.com/your-group" class="icon-box" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте">VK</a>
-            <a href="https://t.me/your-channel" class="icon-box" target="_blank" rel="noopener noreferrer" aria-label="Telegram">TG</a>
-            <a href="https://youtube.com/@your-channel" class="icon-box" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YT</a>
+    <footer class="py-12 bg-stone-200 dark:bg-background-dark border-t border-gold/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <div class="font-display text-2xl font-bold tracking-[0.5em] text-gold mb-2">МНУ</div>
+                    <p class="text-[10px] uppercase tracking-widest opacity-40">&copy; 2024 МЕРТВЫЕ НЕ УМИРАЮТ. Все права защищены прахом.</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a class="w-10 h-10 border border-gold/30 flex items-center justify-center hover:border-gold transition-colors text-xs font-bold" href="https://vk.com/your-group" target="_blank" rel="noopener noreferrer">VK</a>
+                    <a class="w-10 h-10 border border-gold/30 flex items-center justify-center hover:border-gold transition-colors text-xs font-bold" href="https://t.me/your-channel" target="_blank" rel="noopener noreferrer">TG</a>
+                    <a class="w-10 h-10 border border-gold/30 flex items-center justify-center hover:border-gold transition-colors text-xs font-bold" href="https://youtube.com/@your-channel" target="_blank" rel="noopener noreferrer">YT</a>
+                    <a class="w-10 h-10 border border-gold/30 flex items-center justify-center hover:border-gold transition-colors text-xs font-bold" href="#">X</a>
+                </div>
+            </div>
         </div>
-        <p class="cinzel" style="opacity: 0.6;">&copy; 2024 МЕРТВЫЕ НЕ УМИРАЮТ. Все права защищены прахом.</p>
     </footer>
 
-    <!-- Модальное окно регистрации -->
-    <div id="signup-modal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 class="cinzel">Восстань из праха</h2>
-            <form id="signup-form">
-                <input type="email" placeholder="Твой email" required>
-                <button type="submit" class="btn-ui cinzel">Присоединиться</button>
-            </form>
-            <p class="modal-note">Мы пришлем приглашение на бета-тест</p>
-        </div>
-    </div>
-
     <script>
-        // ============ INTERSECTION OBSERVER API (оптимизация производительности) ============
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    // Анимация счётчиков при появлении
-                    if (entry.target.classList.contains('stat-box')) {
-                        animateCounters(entry.target);
-                    }
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-        // ============ АНИМАЦИЯ СЧЁТЧИКОВ ============
-        function animateCounters(element) {
-            const counter = element.querySelector('.stat-number');
-            if (!counter || counter.dataset.animated === 'true') return;
-            
-            counter.dataset.animated = 'true';
-            const target = parseInt(counter.dataset.count);
-            const duration = 2000;
-            const step = target / (duration / 16);
-            let current = 0;
-
-            function updateCounter() {
-                current += step;
-                if (current < target) {
-                    counter.textContent = Math.floor(current).toLocaleString();
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    counter.textContent = target.toLocaleString();
-                }
-            }
-            updateCounter();
-        }
-
-        // ============ ПАРАЛЛАКС С REQUESTANIMATIONFRAME ============
-        let ticking = false;
-        window.addEventListener('scroll', function() {
-            if (!ticking) {
-                window.requestAnimationFrame(function() {
-                    const scroll = window.pageYOffset;
-                    const hero = document.querySelector('.hero');
-                    if (hero) {
-                        hero.style.backgroundPositionY = -(scroll * 0.5) + 'px';
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-
-        // ============ ГАМБУРГЕР-МЕНЮ ============
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        hamburger.addEventListener('click', function() {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
-        });
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        // ============ FAQ АККОРДЕОН ============
-        const faqQuestions = document.querySelectorAll('.faq-question');
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
         
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', function() {
-                const answer = this.nextElementSibling;
-                const isActive = this.classList.contains('active');
-                
-                // Закрыть все ответы
-                faqQuestions.forEach(q => {
-                    q.classList.remove('active');
-                    q.setAttribute('aria-expanded', 'false');
-                    q.nextElementSibling.classList.remove('active');
-                });
-                
-                // Открыть текущий если был неактивен
-                if (!isActive) {
-                    this.classList.add('active');
-                    this.setAttribute('aria-expanded', 'true');
-                    answer.classList.add('active');
-                }
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('.material-icons-outlined');
+            icon.textContent = mobileNav.classList.contains('hidden') ? 'menu' : 'close';
+        });
+
+        // Close mobile menu when clicking a link
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.add('hidden');
+                mobileMenuBtn.querySelector('.material-icons-outlined').textContent = 'menu';
             });
         });
 
-        // ============ МОДАЛЬНОЕ ОКНО ============
-        const modal = document.getElementById('signup-modal');
-        const heroBtn = document.querySelector('.hero .btn-ui');
-        const navBtn = document.querySelector('.nav-cta');
-        const span = document.querySelector('.close');
-
-        function openModal(e) {
-            e.preventDefault();
-            modal.style.display = 'block';
-            modal.setAttribute('aria-hidden', 'false');
-        }
-
-        heroBtn.addEventListener('click', openModal);
-        navBtn.addEventListener('click', openModal);
-
-        function closeModal() {
-            modal.style.display = 'none';
-            modal.setAttribute('aria-hidden', 'true');
-        }
-
-        if (span) span.addEventListener('click', closeModal);
-
-        window.addEventListener('click', function(event) {
-            if (event.target == modal) {
-                closeModal();
-            }
-        });
-
-        // ============ ФОРМА РЕГИСТРАЦИИ ============
-        const signupForm = document.getElementById('signup-form');
-        if (signupForm) {
-            signupForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Спасибо! Мы отправим приглашение на бета-тест.');
-                closeModal();
-                this.reset();
-            });
-        }
-
-        // ============ ПЛАВНАЯ ПРОКРУТКА ============
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
-                if (href !== '#' && href !== '#signup-modal' && href !== null) {
+                if (href !== '#') {
                     e.preventDefault();
                     const target = document.querySelector(href);
                     if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 }
             });
         });
-
-        // ============ ИНДИКАТОР АКТИВНОЙ СЕКЦИИ ============
-        const sections = document.querySelectorAll('section[id]');
-        const navLinkElements = document.querySelectorAll('.nav-link');
-
-        function updateActiveNav() {
-            const scrollPos = window.scrollY + 100;
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinkElements.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        // Используем Intersection Observer для индикатора активной секции
-        const navObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinkElements.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${entry.target.id}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }, { threshold: 0.5 });
-
-        sections.forEach(section => navObserver.observe(section));
     </script>
 </body>
 </html>
